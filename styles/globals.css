@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.editor-placeholder {
+	border: 2px;
+	border-color: black;
+}
+
+.data-slate-leaf {
+	font-weight: bold;
+}
+
+.tw-editorNav {
+	transition: top 0.3s;
+	position: fixed;
+}
