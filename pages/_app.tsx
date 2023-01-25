@@ -5,6 +5,7 @@ import store from '../lib/store';
 import Layout from '../Components/Layout';
 import { Lato, Montserrat } from '@next/font/google';
 import '../styles/globals.css';
+import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const mont = Lato({
 	subsets: ['latin'],
@@ -17,20 +18,17 @@ type ComponentWithPageLayout = AppProps & {
 	};
 };
 
-function MyApp({ Component, pageProps }: ComponentWithPageLayout) {
+function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<main className={mont.className}>
-			<Provider store={store}>
-				<Layout>
-					{Component.PageLayout ? (
-						<Component.PageLayout>
-							<Component {...pageProps} />
-						</Component.PageLayout>
-					) : (
+			<PayPalScriptProvider
+				options={{ 'client-id': process.env.PAYPAL_CLIENT_ID as string }}>
+				<Provider store={store}>
+					<Layout>
 						<Component {...pageProps} />
-					)}
-				</Layout>
-			</Provider>
+					</Layout>
+				</Provider>
+			</PayPalScriptProvider>
 		</main>
 	);
 }

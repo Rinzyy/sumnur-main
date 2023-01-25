@@ -11,6 +11,7 @@ export const userSlice = createSlice({
 		userUID: null,
 		userFuel: 0,
 		fuelCost: 1,
+		buyPlan: '',
 	},
 
 	reducers: {
@@ -53,6 +54,9 @@ export const userSlice = createSlice({
 			state.userNoFuelModal = false;
 			// console.log(state.inputString);
 		},
+		setPlan: (state, action) => {
+			state.buyPlan = action.payload;
+		},
 	},
 });
 
@@ -67,5 +71,6 @@ export const {
 	CloseModal,
 	OpenNoFuelModal,
 	CloseNoFuelModal,
+	setPlan,
 } = userSlice.actions;
 export default userSlice.reducer;

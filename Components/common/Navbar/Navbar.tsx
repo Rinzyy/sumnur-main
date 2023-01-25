@@ -18,8 +18,11 @@ import { signOut } from 'firebase/auth';
 import { auth, db } from '../../../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
+	const router = useRouter();
+
 	const [open, setOpen] = React.useState(false);
 	const modalHandler = useSelector(
 		(state: any) => state.userControl.userSignInModal
@@ -64,6 +67,19 @@ const Navbar = () => {
 			});
 	};
 
+	function renderSwitch(param: string) {
+		switch (param) {
+			case '/':
+				return 'Proofreading';
+			case '/toEmail':
+				return 'Email Conversion';
+			case '/rephraser':
+				return 'Paraphrase';
+			default:
+				return ' ';
+		}
+	}
+
 	const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
 		null
 	);
@@ -78,7 +94,7 @@ const Navbar = () => {
 	const anchorbool = Boolean(anchorEl);
 
 	return (
-		<nav className="fixed top-0 w-full bg-white z-50 border-b-2">
+		<nav className="fixed top-0 w-full bg-white z-[100] border-b-2">
 			<div className="flex items-center justify-between px-6 py-4">
 				<Link
 					href="/"
@@ -86,18 +102,10 @@ const Navbar = () => {
 					<span className="text-xl font-bold">Sumnur</span>
 				</Link>
 				<div className="flex gap-4 items-center">
-					<Link
-						className="hover:scale-105 transition-all duration-100"
-						href="/">
+					<span className="hover:scale-105 transition-all duration-100">
 						{' '}
-						Home
-					</Link>
-					<Link
-						className="hover:scale-105 transition-all duration-100"
-						href="/editor">
-						{' '}
-						Editor
-					</Link>
+						{renderSwitch(router.pathname)}
+					</span>
 				</div>
 				<div className="flex flex-row">
 					{userPhoto == null ? (

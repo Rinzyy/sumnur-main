@@ -19,7 +19,10 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx",
-		"Components/common/Navbar/Navbar.jsx"
-, "Components/TextEditor/PasteHTML.jsx", "Components/common/Editor/CompareText.jsx"	],
+		"Components/common/Navbar/Navbar.jsx",
+		"Components/TextEditor/PasteHTML.jsx",
+		"Components/common/Editor/CompareText.jsx",
+		"Components/Payment/PaymentForm.js"
+	],
 	"exclude": ["node_modules"]
 }

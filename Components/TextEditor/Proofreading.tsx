@@ -2,32 +2,25 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import EditorSetting from '../../Components/common/RightSide/EditorSetting';
-import style from './editor.module.css';
-import editorLayout from '../../Components/TextEditor/editorLayout';
+import EditorSetting from '../common/RightSide/EditorSetting';
+import style from '../../pages/editor.module.css';
 import SouthIcon from '@mui/icons-material/South';
-import { pageData } from '../../Components/pageData';
+import { pageData } from '../pageData';
 
-const DynamicLoadedEditor = dynamic(
-	import('../../Components/TextEditor/TextEditor'),
-	{
-		loading: () => (
-			<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
-		),
-		ssr: false,
-	}
-);
-const DynamicLoadedOutput = dynamic(
-	import('../../Components/TextEditor/TextOutput'),
-	{
-		loading: () => (
-			<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
-		),
-		ssr: false,
-	}
-);
+const DynamicLoadedEditor = dynamic(import('./TextEditor'), {
+	loading: () => (
+		<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
+	),
+	ssr: false,
+});
+const DynamicLoadedOutput = dynamic(import('./TextOutput'), {
+	loading: () => (
+		<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
+	),
+	ssr: false,
+});
 
-const proofreading = () => {
+const Proofreading = () => {
 	return (
 		<div>
 			<div className="relative w-full flex flex-row ">
@@ -53,9 +46,7 @@ const proofreading = () => {
 	);
 };
 
-proofreading.PageLayout = editorLayout;
-
-export default proofreading;
+export default Proofreading;
 
 {
 	/* <div className={style.bgpattern}>

@@ -1,0 +1,28 @@
+.bgGrid {
+	position: relative;
+	background-color: #ffffff;
+	opacity: 1;
+	background-image: linear-gradient(#d0d0d0 1.5px, transparent 1.5px),
+		linear-gradient(to right, #d0d0d0 1.5px, #ffffff 1.5px);
+	background-size: 50px 50px;
+	width: 451.5px;
+	height: 401.5px;
+	margin-left: 6rem;
+	margin-right: 6rem;
+}
+
+.card {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	width: 360px;
+	height: 256px;
+	border-radius: 1rem;
+	border-color: #604fcd;
+	border-width: 2px;
+	-webkit-box-shadow: 3px 3px 0px 1px rgba(96, 79, 205, 1);
+	-moz-box-shadow: 3px 3px 0px 1px rgba(96, 79, 205, 1);
+	box-shadow: 8px 8px 0px 0px rgba(96, 79, 205, 1);
+}

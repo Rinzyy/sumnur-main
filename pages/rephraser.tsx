@@ -3,15 +3,11 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import SouthIcon from '@mui/icons-material/South';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
-import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import EditorSetting from '../../Components/common/RightSide/EditorSetting';
+import EditorSetting from '../Components/common/RightSide/EditorSetting';
 import style from './editor.module.css';
-import editorLayout from '../../Components/TextEditor/editorLayout';
-import { emailData } from '../../Components/pageData';
+import { rephraserData } from '../Components/pageData';
 const DynamicLoadedEditor = dynamic(
-	import('../../Components/TextEditor/TextEditor'),
+	import('../Components/TextEditor/TextEditor'),
 	{
 		loading: () => (
 			<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
@@ -20,7 +16,7 @@ const DynamicLoadedEditor = dynamic(
 	}
 );
 const DynamicLoadedOutput = dynamic(
-	import('../../Components/TextEditor/TextOutput'),
+	import('../Components/TextEditor/TextOutput'),
 	{
 		loading: () => (
 			<div className="p-10 w-full flex flex-col gap-8 border-r-2"></div>
@@ -48,14 +44,13 @@ const toEmail = () => {
 					</div>
 				</div>
 				<div className=" md:w-3/12 md:border-l-2 md:px-10 md:py-6">
-					<EditorSetting currData={emailData} />
+					<EditorSetting currData={rephraserData} />
 				</div>
 			</div>
 		</div>
 	);
 };
 
-toEmail.PageLayout = editorLayout;
 export default toEmail;
 
 // old;

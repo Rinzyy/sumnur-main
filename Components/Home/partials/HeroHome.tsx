@@ -1,21 +1,56 @@
 import React, { useState } from 'react';
 
 import HeroImage from '../images/hero-image.png';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import style from './home.module.css';
 
 function HeroHome() {
 	const [videoModalOpen, setVideoModalOpen] = useState(false);
 
 	return (
-		<section className="relative">
-			<div className="left">
-				<span>Say goodbye to your spelling and grammars error with</span>
-				<span>Sumnur</span>
-				<span>
-					Accurate and professional proofreading services for all your texts
-					Essay, and emails.
-				</span>
-				<div>
-					<button>Start Free Trial</button>
+		<section className="relative flex flex-col md:flex-row items-center justify-between bg-white py-20 ">
+			<div className=" flex flex-col gap-10 px-10 pb-10 ">
+				<div className="flex flex-col gap-4">
+					<h1 className="text-4xl -mt-4">Sumnur AI-Powered </h1>
+					<h1 className="text-4xl -mt-4">Writing Tool</h1>
+				</div>
+				<div className="flex justify-start items-start flex-col md:w-[500px] m-1/2">
+					<p className=" text-start">
+						Efficiently detects grammar, punctuation, and spelling errors and
+						also suggests more effective word choices and sentence structure to
+						elevate your writing to new heights.
+					</p>
+				</div>
+				<div className="flex items-center justify-start">
+					<button
+						className="  border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
+							text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
+							disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100">
+						<span className="font-medium"> Start Free Trial </span>
+					</button>
+				</div>
+				<div className="flex gap-10">
+					<div className="flex items-center gap-1">
+						<CheckCircleIcon className="text-primary" />
+						<span> Free 50 Fuel</span>
+					</div>
+					<div className="flex items-center gap-1">
+						<CheckCircleIcon className="text-primary" />
+						<span> Use After Login</span>
+					</div>
+				</div>
+			</div>
+			<div className={style.bgGrid}>
+				<div className={style.card}>
+					<div className="h-full flex flex-col">
+						<div className="m-4 h-1/2">
+							<span>Detects all your spolling and grommer.</span>
+						</div>
+						<hr className=" border-primary border-[1px]" />
+						<div className="m-4 h-1/2">
+							<span>Detects all your spelling and grammers.</span>
+						</div>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -23,3 +58,21 @@ function HeroHome() {
 }
 
 export default HeroHome;
+
+{
+	/* <span>
+					Say goodbye to tedious writing, and hello to effortless with
+				</span> */
+}
+{
+	/* <p>
+		tired of spending countless hours proofreading your work? Sumnur is
+		here to change that. State-of-the-art AI technology not only detects
+		grammar, punctuation, and spelling errors, but also suggests more
+		effective word choices and sentence structure to elevate your writing
+		to new heights. Imagine a world where you can confidently submit your
+		work, knowing that it is polished, professional, and error-free. With
+		Sumnur, that world is a reality. Don't just take our word for it, try
+		it now and experience the transformative power of Sumnur for yourself.
+	</p> */
+}
