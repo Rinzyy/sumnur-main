@@ -90,11 +90,12 @@ const TextEditor = () => {
 		return (
 			<span
 				{...attributes}
-				style={{
-					textDecoration: leaf.bold ? 'underline' : 'none',
-					textDecorationColor: leaf.bold ? 'red' : 'black',
-					fontStyle: leaf.italic ? 'italic' : 'normal',
-				}}>
+				// style={{
+				// 	textDecoration: leaf.bold ? 'underline' : 'none',
+				// 	textDecorationColor: leaf.bold ? 'red' : 'black',
+				// 	fontStyle: leaf.italic ? 'italic' : 'normal',
+				// }}
+			>
 				{children}
 			</span>
 		);

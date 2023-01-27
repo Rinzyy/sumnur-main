@@ -21,14 +21,11 @@ type ComponentWithPageLayout = AppProps & {
 function MyApp({ Component, pageProps }: AppProps) {
 	return (
 		<main className={mont.className}>
-			<PayPalScriptProvider
-				options={{ 'client-id': process.env.PAYPAL_CLIENT_ID as string }}>
-				<Provider store={store}>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
-				</Provider>
-			</PayPalScriptProvider>
+			<Provider store={store}>
+				<Layout>
+					<Component {...pageProps} />
+				</Layout>
+			</Provider>
 		</main>
 	);
 }

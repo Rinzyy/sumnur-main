@@ -7,6 +7,7 @@ import style from './editor.module.css';
 import SouthIcon from '@mui/icons-material/South';
 import { pageData } from '../Components/pageData';
 import { NextPage } from 'next';
+import Head from 'next/head';
 
 const DynamicLoadedEditor = dynamic(
 	import('../Components/TextEditor/TextEditor'),
@@ -29,27 +30,32 @@ const DynamicLoadedOutput = dynamic(
 
 const Home: NextPage = () => {
 	return (
-		<div>
-			<div className="relative w-full flex flex-row ">
-				<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
-				<div className="w-full mt-10 md:mt-0 md:w-9/12">
-					<div className={style.bgpattern}>
-						<div className="md:w-full">
-							<DynamicLoadedEditor />
-						</div>
-						<div className=" text-center">
-							<SouthIcon />
-						</div>
-						<div className="md:w-full">
-							<DynamicLoadedOutput ReadOnly={true} />
+		<>
+			
+			<section
+				id="Editor"
+				className=" scroll-smooth">
+				<div className="relative w-full flex flex-row ">
+					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
+					<div className="w-full mt-10 md:mt-0 md:w-9/12">
+						<div className={style.bgpattern}>
+							<div className="md:w-full">
+								<DynamicLoadedEditor />
+							</div>
+							<div className=" text-center">
+								<SouthIcon />
+							</div>
+							<div className="md:w-full">
+								<DynamicLoadedOutput ReadOnly={true} />
+							</div>
 						</div>
 					</div>
+					<div className=" md:w-3/12 md:border-l-2 md:px-10 md:py-6">
+						<EditorSetting currData={pageData} />
+					</div>
 				</div>
-				<div className=" md:w-3/12 md:border-l-2 md:px-10 md:py-6">
-					<EditorSetting currData={pageData} />
-				</div>
-			</div>
-		</div>
+			</section>
+		</>
 	);
 };
 

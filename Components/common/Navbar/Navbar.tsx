@@ -43,8 +43,8 @@ const Navbar = () => {
 			dispatch(isUserLogin());
 			dispatch(SetUserPhoto(userData.photoURL));
 			if (localStorage.getItem('userFuel') != null) {
-				// dispatch(ShowUserFuel(localStorage.getItem('userFuel')));
-				console.log('yes fuel is added to redux');
+				dispatch(ShowUserFuel(localStorage.getItem('userFuel')));
+				// console.log('yes fuel is added to redux');
 			}
 			dispatch(SetUserUID(userData.uid));
 		}
@@ -94,7 +94,9 @@ const Navbar = () => {
 	const anchorbool = Boolean(anchorEl);
 
 	return (
-		<nav className="fixed top-0 w-full bg-white z-[100] border-b-2">
+		<nav
+			id="Top"
+			className="fixed top-0 w-full bg-white z-[100] border-b-2">
 			<div className="flex items-center justify-between px-6 py-4">
 				<Link
 					href="/"

@@ -28,6 +28,8 @@ export default async function handler(
 				choices: [{ text: '\n\n Server Error. Please try again later.' }],
 			},
 		});
+		console.log(req.body.text);
+		console.log(error);
 	}
 
 	console.log();

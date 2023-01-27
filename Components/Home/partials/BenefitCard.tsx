@@ -1,6 +1,11 @@
+import Link from 'next/link';
 import React from 'react';
-
-const BenefitCard = () => {
+interface props {
+	title: string;
+	description: string;
+	link: string;
+}
+const BenefitCard = ({ title, description, link }: props) => {
 	return (
 		<div className="relative w-full">
 			<div className="p-4 md:w-full">
@@ -19,13 +24,12 @@ const BenefitCard = () => {
 					</div>
 					<div className="flex-grow">
 						<h2 className="text-gray-900 text-lg title-font font-medium mb-3">
-							Spelling & Grammar
+							{title}
 						</h2>
-						<p className="leading-relaxed text-base">
-							Blue bottle crucifix vinyl post-ironic four dollar toast vegan
-							taxidermy. Gastropub indxgo juice poutine.
-						</p>
-						<a className="mt-3 text-indigo-500 inline-flex items-center">
+						<p className="leading-relaxed text-base">{description}</p>
+						<Link
+							href={link}
+							className="mt-3 text-indigo-500 inline-flex items-center">
 							Try it
 							<svg
 								fill="none"
@@ -37,7 +41,7 @@ const BenefitCard = () => {
 								viewBox="0 0 24 24">
 								<path d="M5 12h14M12 5l7 7-7 7"></path>
 							</svg>
-						</a>
+						</Link>
 					</div>
 				</div>
 			</div>

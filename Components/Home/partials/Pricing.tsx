@@ -15,9 +15,7 @@ const Pricing = () => {
 				</span>
 			</div>
 			<div className="text-center">
-				<h3 className=" text-4xl font-medium text-gray-900 dark:text-white">
-					Re-Fueling
-				</h3>
+				<h3 className=" text-4xl font-medium text-gray-900 ">Re-Fueling</h3>
 			</div>
 			<div className="m-10 py-10 grid grid-cols-2 md:m-auto lg:m-16 lg:grid-cols-5 gap-4 ">
 				{PricingData.map(item => (

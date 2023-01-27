@@ -1,5 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApp, getApps } from "firebase/app";
+const {
+	initializeAppCheck,
+	ReCaptchaV3Provider,
+} = require('firebase/app-check');
 // import { getAnalytics } from "firebase/analytics";
 import {getFirestore} from "firebase/firestore"
 import {getStorage} from 'firebase/storage'
@@ -24,6 +28,13 @@ console.log('test')
 
 // Initialize Firebase
 const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+// const appCheck = initializeAppCheck(app, {
+// 	provider: new ReCaptchaV3Provider('abcdefghijklmnopqrstuvwxy-1234567890abcd'),
+
+// 	// Optional argument. If true, the SDK automatically refreshes App Check
+// 	// tokens as needed.
+// 	isTokenAutoRefreshEnabled: true,
+// });
 const auth = getAuth();
 const db = getFirestore(app);
 const storage = getStorage(app);

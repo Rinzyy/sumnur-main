@@ -3,10 +3,21 @@ import React, { useState } from 'react';
 import HeroImage from '../images/hero-image.png';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import style from './home.module.css';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { OpenModal } from '../../../lib/slices/userSlice';
 
 function HeroHome() {
 	const [videoModalOpen, setVideoModalOpen] = useState(false);
+	const dispatch = useDispatch();
+	const router = useRouter();
 
+	const ClickHandlerBeforeLogin = () => {
+		dispatch(OpenModal());
+	};
+	const ClickHandlerAfterLogin = () => {
+		router.push('/Payment');
+	};
 	return (
 		<section className="relative flex flex-col md:flex-row items-center justify-between bg-white py-20 ">
 			<div className=" flex flex-col gap-10 px-10 pb-10 ">
@@ -22,22 +33,42 @@ function HeroHome() {
 					</p>
 				</div>
 				<div className="flex items-center justify-start">
-					<button
-						className="  border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
+					{videoModalOpen ? (
+						<button
+							className="  border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
 							text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
-							disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100">
-						<span className="font-medium"> Start Free Trial </span>
-					</button>
+							disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
+							onClick={ClickHandlerBeforeLogin}>
+							<span className="font-medium"> Start Free Trial </span>
+						</button>
+					) : (
+						<button
+							className="  border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
+							text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
+							disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
+							onClick={ClickHandlerAfterLogin}>
+							<span className="font-medium"> Buy more Fuel </span>
+						</button>
+					)}
 				</div>
 				<div className="flex gap-10">
 					<div className="flex items-center gap-1">
 						<CheckCircleIcon className="text-primary" />
-						<span> Free 50 Fuel</span>
+						{videoModalOpen ? (
+							<span> Free 50 Fuel</span>
+						) : (
+							<span> Fast Payment</span>
+						)}
 					</div>
-					<div className="flex items-center gap-1">
-						<CheckCircleIcon className="text-primary" />
-						<span> Use After Login</span>
-					</div>
+
+					{videoModalOpen ? (
+						<div className="flex items-center gap-1">
+							<CheckCircleIcon className="text-primary" />
+							<span> Fast Payment</span>
+						</div>
+					) : (
+						<span> </span>
+					)}
 				</div>
 			</div>
 			<div className={style.bgGrid}>
