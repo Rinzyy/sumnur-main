@@ -31,7 +31,6 @@ const DynamicLoadedOutput = dynamic(
 const Home: NextPage = () => {
 	return (
 		<>
-			
 			<section
 				id="Editor"
 				className=" scroll-smooth">
