@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { OpenModal } from '../../../lib/slices/userSlice';
 
 function HeroHome() {
-	const [videoModalOpen, setVideoModalOpen] = useState(false);
+	const [videoModalOpen, setVideoModalOpen] = useState(true);
 	const dispatch = useDispatch();
 	const router = useRouter();
 
