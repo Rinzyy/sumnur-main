@@ -15,15 +15,25 @@ import {
 	SetUserPhoto,
 	SetUserUID,
 } from '../../lib/slices/userSlice';
-import { addDoc, collection, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	doc,
+	getDoc,
+	setDoc,
+	writeBatch,
+} from 'firebase/firestore';
 
 interface Prop {
 	closeModal: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-function createNewUser(user: any) {
+async function createNewUser(user: any) {
+	const batch = writeBatch(db);
+	console.log(user.uid);
+
 	const userRef = doc(db, 'Users', user.uid);
-	setDoc(
+	batch.set(
 		userRef,
 		{
 			userId: user.uid,
@@ -36,7 +46,7 @@ function createNewUser(user: any) {
 	);
 
 	const fuelRef = doc(db, 'UsersFuel', user.uid);
-	setDoc(
+	batch.set(
 		fuelRef,
 		{
 			fuel: 50,
@@ -44,10 +54,14 @@ function createNewUser(user: any) {
 			isPremium: false,
 			totalFuelUsage: 0,
 			uid: user.uid,
+			name: user.displayName,
 		},
 		//if already exist it will overwrite it with data above
 		{ merge: true }
 	);
+
+	await batch.commit();
+	console.log('done');
 }
 const LoginPage = ({ closeModal }: Prop) => {
 	const dispatch = useDispatch();
@@ -59,7 +73,7 @@ const LoginPage = ({ closeModal }: Prop) => {
 	let user: any;
 	const handleSignIn = async () => {
 		signInWithPopup(auth, provider)
-			.then(result => {
+			.then(async result => {
 				// This gives you a Google Access Token. You can use it to access the Google API.
 				const credential = GoogleAuthProvider.credentialFromResult(result);
 				const token = credential?.accessToken;
@@ -73,8 +87,8 @@ const LoginPage = ({ closeModal }: Prop) => {
 
 				const isNewUser = getAdditionalUserInfo(result)?.isNewUser;
 				if (isNewUser) {
+					await createNewUser(user);
 					//if new user it create new acc and add fuel
-					createNewUser(user);
 				}
 				dispatch(CloseModal());
 
@@ -85,12 +99,12 @@ const LoginPage = ({ closeModal }: Prop) => {
 			})
 			.catch(error => {
 				// Handle Errors here.
-				const errorCode = error.code;
-				const errorMessage = error.message;
+				// const errorCode = error.code;
+				// const errorMessage = error.message;
 				// The email of the user's account used.
-				const email = error.customData.en;
+				// const email = error.customData.en;
 				// The AuthCredential type that was used.
-				const credential = GoogleAuthProvider.credentialFromError(error);
+				// const credential = GoogleAuthProvider.credentialFromError(error);
 				console.log(error);
 				// ...
 			});
