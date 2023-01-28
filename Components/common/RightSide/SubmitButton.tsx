@@ -49,34 +49,34 @@ interface SubmitProps {
 }
 
 //update to database might change to transaction in the future
-async function FuelTransaction(userUID: string, fuelCost: number) {
-	let result = false;
-	if (userUID == null) return;
-	try {
-		const fuelRef = doc(db, 'UsersFuel', userUID);
-		await runTransaction(db, async transaction => {
-			const fuelDoc = await transaction.get(fuelRef);
-			if (!fuelDoc.exists()) {
-				throw 'Document does not exist!';
-				//add create user acc merge
-			}
-			if (fuelDoc.data().fuel < fuelCost) {
-				console.log('Insufficent fund');
-				result = false;
-				throw 'Insufficient fund';
-				//add error modal
-			}
+// async function FuelTransaction(userUID: string, fuelCost: number) {
+// 	let result = false;
+// 	if (userUID == null) return;
+// 	try {
+// 		const fuelRef = doc(db, 'UsersFuel', userUID);
+// 		await runTransaction(db, async transaction => {
+// 			const fuelDoc = await transaction.get(fuelRef);
+// 			if (!fuelDoc.exists()) {
+// 				throw 'Document does not exist!';
+// 				//add create user acc merge
+// 			}
+// 			if (fuelDoc.data().fuel < fuelCost) {
+// 				console.log('Insufficent fund');
+// 				result = false;
+// 				throw 'Insufficient fund';
+// 				//add error modal
+// 			}
 
-			transaction.update(fuelRef, { fuel: increment(-fuelCost) });
-			result = true;
-		});
-		console.log('Transaction successfully committed!');
-	} catch (e) {
-		console.log('Transaction failed: ', e);
-		//error modal
-	}
-	return result;
-}
+// 			transaction.update(fuelRef, { fuel: increment(-fuelCost) });
+// 			result = true;
+// 		});
+// 		console.log('Transaction successfully committed!');
+// 	} catch (e) {
+// 		console.log('Transaction failed: ', e);
+// 		//error modal
+// 	}
+// 	return result;
+// }
 
 const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 	const [disableBtn, setDisableBtn] = useState(false);
@@ -120,17 +120,17 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 		dispatch(setButtonAnime());
 
 		//commit to database
-		const fuelChecking = await FuelTransaction(
-			JSON.parse(localStorage.getItem('user') as string).uid,
-			fuelCost
-		);
+		// const fuelChecking = await FuelTransaction(
+		// 	JSON.parse(localStorage.getItem('user') as string).uid,
+		// 	fuelCost
+		// );
 
-		if (!fuelChecking) {
-			dispatch(setButtonAnime());
-			handleOpen();
-			//pop up modal
-			return;
-		}
+		// if (!fuelChecking) {
+		// 	dispatch(setButtonAnime());
+		// 	handleOpen();
+		// 	//pop up modal
+		// 	return;
+		// }
 		//return error
 
 		// checkAPi it work
@@ -142,8 +142,14 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 				'Content-Type': 'application/json',
 			},
 			//send to backeend
-			body: JSON.stringify({ text: Input }),
+			body: JSON.stringify({
+				userUID: JSON.parse(localStorage.getItem('user') as string).uid,
+				fuelCost: fuelCost,
+				changeAPI: changeAPI,
+				text: Input,
+			}),
 		});
+
 		const data = await response.json();
 
 		// send to back end

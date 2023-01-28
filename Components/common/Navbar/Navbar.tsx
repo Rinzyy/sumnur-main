@@ -116,7 +116,7 @@ const Navbar = () => {
 								className="cursor-pointer flex gap-2 items-center justify-center group"
 								onClick={() => dispatch(OpenModal())}>
 								<img
-									className=" rounded-full w-8 h-8 outline outline-offset-2 outline-primary group-hover:scale-110 transition-all duration-200"
+									className=" rounded-full w-8 h-8 ring ring-offset-2 ring-primary group-hover:scale-110 transition-all duration-200"
 									src="/user.jpeg"
 									alt=""
 								/>

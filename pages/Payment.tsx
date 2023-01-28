@@ -33,8 +33,8 @@ const Payment = (choosenPlan: props) => {
 	}, [radioState]);
 
 	return (
-		<div className="relative flex flex-col items-center justify-center h-[80vh] pb-10">
-			<div className="flex flex-row gap-2">
+		<div className="relative flex flex-col items-center justify-center h-full pb-10">
+			<div className="flex flex-col gap-2 mt-10">
 				<div className="flex flex-wrap items-center justify-center gap-4">
 					{PricingData.map(item => (
 						<label
@@ -89,7 +89,7 @@ const Payment = (choosenPlan: props) => {
 					))}
 				</div>
 			</div>
-			<div className=" h-auto rounded-md flex flex-col gap-4 p-6">
+			<div className=" h-full rounded-md flex flex-col gap-4 p-6">
 				<span> Payment Method:</span>
 				<div className="w-full ">
 					<Paypal

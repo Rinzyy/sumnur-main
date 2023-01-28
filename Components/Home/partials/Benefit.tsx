@@ -33,6 +33,7 @@ const Benefit = () => {
 					<div className="flex flex-col lg:flex-row -m-4">
 						{data.map(item => (
 							<BenefitCard
+								key={item.title}
 								title={item.title}
 								description={item.description}
 								link={item.link}
