@@ -4,7 +4,7 @@ import * as functions from 'firebase-functions';
 
 const configuration = new Configuration({
 	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
-	apiKey: process.env.NEXT_SECRET_OPENAI_API_KEY,
+	apiKey: process.env.OPENAI_API_KEY,
 });
 export const openai = new OpenAIApi(configuration);
 
@@ -26,7 +26,11 @@ export default async function handler(
 	} catch (error) {
 		res.status(400).json({
 			result: {
-				choices: [{ text: '\n\n Server Error. Please try again later.' }],
+				choices: [
+					{
+						text: `\n\n Server Error. Please try again later. ${process.env.BLAH}`,
+					},
+				],
 			},
 		});
 	}
