@@ -4,7 +4,7 @@ import { FuelTransaction } from '../../../../lib/FuelTransactionfb';
 
 const configuration = new Configuration({
 	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
-	apiKey: process.env.OPEN_AI_KEY,
+	apiKey: process.env.OPENAI_API_KEY,
 });
 export const openai = new OpenAIApi(configuration);
 

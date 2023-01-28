@@ -48,6 +48,10 @@ interface SubmitProps {
 	fuelCost: number;
 }
 
+const removeLeadingSpaces = (str: string): string => {
+	return str.replace(/^\s*\n|^\s*/g, '');
+};
+
 //update to database might change to transaction in the future
 // async function FuelTransaction(userUID: string, fuelCost: number) {
 // 	let result = false;
@@ -136,6 +140,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 		// checkAPi it work
 		// console.log(changeAPI);
 		//so openai wont break
+		const pureString = removeLeadingSpaces(Input);
 		const response = await fetch(changeAPI, {
 			method: 'POST',
 			headers: {
@@ -146,7 +151,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 				userUID: JSON.parse(localStorage.getItem('user') as string).uid,
 				fuelCost: fuelCost,
 				changeAPI: changeAPI,
-				text: Input,
+				text: pureString,
 			}),
 		});
 

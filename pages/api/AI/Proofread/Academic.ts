@@ -27,6 +27,7 @@ export default async function handler(
 		}
 
 		FuelTransaction(req.body.userUID, req.body.fuelCost);
+
 		if (req.body.text == '') {
 			req.body.text = 'Please type ur text above.';
 		}

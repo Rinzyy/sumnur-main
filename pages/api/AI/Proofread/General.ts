@@ -17,7 +17,7 @@ export default async function handler(
 ) {
 	try {
 		if (req.body.userUID == null) {
-			res.status(400).json({
+			throw res.status(400).json({
 				result: {
 					choices: [
 						{
