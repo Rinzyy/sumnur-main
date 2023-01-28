@@ -1,8 +1,5 @@
-import { error } from 'console';
-import { doc, increment, runTransaction } from 'firebase/firestore';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { Configuration, OpenAIApi } from 'openai';
-import { db } from '../../../../firebase';
 import { FuelTransaction } from '../../../../lib/FuelTransactionfb';
 
 const configuration = new Configuration({

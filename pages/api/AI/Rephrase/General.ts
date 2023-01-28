@@ -26,12 +26,13 @@ export default async function handler(
 		}
 
 		FuelTransaction(req.body.userUID, req.body.fuelCost);
+
 		if (req.body.text == '') {
 			req.body.text = 'Please type ur text above.';
 		}
 		const response = await openai.createCompletion({
 			model: 'text-davinci-003',
-			prompt: `Provide a rephrasing of the following sentence in a more readable general English format: ${req.body.text}`,
+			prompt: `Provide a rephrasing of the following sentence in a more readable general English format: '${req.body.text}'`,
 			max_tokens: 1000,
 			temperature: 0.7,
 		});
