@@ -1,9 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Configuration, OpenAIApi } from 'openai';
+import * as functions from 'firebase-functions';
 
 const configuration = new Configuration({
 	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
-	apiKey: process.env.OPEN_AI_KEY,
+	apiKey: process.env.NEXT_SECRET_OPENAI_API_KEY,
 });
 export const openai = new OpenAIApi(configuration);
 

@@ -17,6 +17,7 @@
 		"@reduxjs/toolkit": "^1.9.1",
 		"diff": "^5.1.0",
 		"firebase": "^9.15.0",
+		"firebase-functions": "^4.2.0",
 		"firebaseui": "^6.0.2",
 		"jsdom": "^21.0.0",
 		"lexical": "^0.7.6",
