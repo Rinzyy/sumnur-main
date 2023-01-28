@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Configuration, OpenAIApi } from 'openai';
+import { FuelTransaction } from '../../../../lib/FuelTransactionfb';
 
 const configuration = new Configuration({
 	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
@@ -12,6 +13,19 @@ export default async function handler(
 	res: NextApiResponse
 ) {
 	try {
+		if (req.body.userUID == null) {
+			res.status(400).json({
+				result: {
+					choices: [
+						{
+							text: `Error no userUID`,
+						},
+					],
+				},
+			});
+		}
+
+		FuelTransaction(req.body.userUID, req.body.fuelCost);
 		if (req.body.text == '') {
 			req.body.text = 'Please type ur text above.';
 		}
