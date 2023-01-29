@@ -151,7 +151,7 @@ const EditorSetting = ({ currData }: Props) => {
 			</div>
 
 			{/* //mobile */}
-			<div className="absolute w-full h-full left-1/2 transform -translate-x-1/2 flex justify-center items-center  md:hidden z-10">
+			<div className="fixed top-[90%] left-1/2 transform -translate-x-1/2 flex justify-center items-center  md:hidden z-10">
 				<div className="sticky flex gap-2  top-[90%] mb-12  w-[] bg-white z-60">
 					<SubmitButton
 						key={API + 2}
