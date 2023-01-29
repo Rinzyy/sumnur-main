@@ -27,7 +27,7 @@ const Card = ({ name, amount, price }: props) => {
 	return (
 		<div
 			onClick={ClickHandler}
-			className={`h-full w-52 p-6 bg-white shadow-xl rounded-lg border-2 ${
+			className={`h-full w-50 md:w-52 px-6 pt-6 pb-5 bg-white shadow-xl rounded-lg border-2 ${
 				name == 'PRO' ? 'border-primary' : ''
 			}
 			${

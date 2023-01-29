@@ -115,7 +115,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 	// 	}
 	// }, [userFuel]);
 
-	const handleKeyDown = React.useCallback(async () => {
+	const handleKeyDown = async () => {
 		//prevent random brekaline
 		dispatch(submitGrammar());
 
@@ -180,7 +180,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 
 		//animation
 		dispatch(setButtonAnime());
-	}, [Input]);
+	};
 
 	return (
 		<>

@@ -4,17 +4,20 @@ import BenefitCard from './BenefitCard';
 const data = [
 	{
 		title: 'Spelling & Grammar',
-		description: 'Detect Spelling ad Grammar Error',
+		description:
+			' Identifies and corrects errors in grammar, punctuation, and spelling to ensure clear, polished writing',
 		link: '/',
 	},
 	{
 		title: 'Rephraser',
-		description: 'Paraphrase your text into more standard english',
+		description:
+			'Paraphrase your text to make it easier to read, unique and free of plagiarism, while also making it better written.',
 		link: '/rephraser',
 	},
 	{
 		title: 'Email Convertor',
-		description: 'Convert normal english into email',
+		description:
+			'Automatically adapts text to a formal, professional email format and helps avoid common mistakes.',
 		link: '/toEmail',
 	},
 ];

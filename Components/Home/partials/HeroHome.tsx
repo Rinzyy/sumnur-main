@@ -19,8 +19,8 @@ function HeroHome() {
 		router.push('/Payment');
 	};
 	return (
-		<section className="relative flex flex-col md:flex-row items-center justify-between bg-white py-20 ">
-			<div className=" flex flex-col gap-10 px-10 pb-10 ">
+		<section className="relative flex flex-col md:flex-row items-center justify-between bg-white py-20 px-20  ">
+			<div className=" flex flex-col gap-10 pb-10 ">
 				<div className="flex flex-col gap-4">
 					<h1 className="text-4xl -mt-4">Sumnur AI-Powered </h1>
 					<h1 className="text-4xl -mt-4">Writing Tool</h1>
@@ -71,7 +71,8 @@ function HeroHome() {
 					)}
 				</div>
 			</div>
-			<div className={style.bgGrid}>
+			<div className="relative w-[360px] h-[256px]">
+				<div className={style.bgGrid}></div>
 				<div className={style.card}>
 					<div className="h-full flex flex-col">
 						<div className="m-4 h-1/2">

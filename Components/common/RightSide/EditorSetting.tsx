@@ -18,7 +18,7 @@ import {
 	OpenNoFuelModal,
 	ShowUserFuel,
 } from '../../../lib/slices/userSlice';
-import { Modal } from '@mui/material';
+import { Fab, Modal } from '@mui/material';
 import InsufficientFuel from './InsufficientFuel';
 
 interface Options {
@@ -151,8 +151,8 @@ const EditorSetting = ({ currData }: Props) => {
 			</div>
 
 			{/* //mobile */}
-			<div className=" md:hidden  ">
-				<div className="fixed bottom-8 right-1/2 translate-x-1/2 z-10">
+			<div className="absolute w-full h-full left-1/2 transform -translate-x-1/2 flex justify-center items-center  md:hidden z-10">
+				<div className="sticky flex gap-2  top-[90%] mb-12  w-[] bg-white z-60">
 					<SubmitButton
 						key={API + 2}
 						changeAPI={API}
