@@ -19,7 +19,7 @@ function HeroHome() {
 		router.push('/Payment');
 	};
 	return (
-		<section className="relative flex flex-col md:flex-row items-center justify-between bg-white py-20 px-20  ">
+		<section className="relative flex flex-col md:flex-row items-center justify-between border-t-2 bg-white py-20 px-20  ">
 			<div className=" flex flex-col gap-10 pb-10 ">
 				<div className="flex flex-col gap-4">
 					<h1 className="text-4xl -mt-4">Sumnur AI-Powered </h1>

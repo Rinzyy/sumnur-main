@@ -3,12 +3,14 @@ import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
 import SouthIcon from '@mui/icons-material/South';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
-import PublishedWithChangesOutlinedIcon from '@mui/icons-material/PublishedWithChangesOutlined';
-import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
-import EditorSetting from '../Components/common/RightSide/EditorSetting';
 import style from './editor.module.css';
-import { emailData } from '../Components/pageData';
+import EmailConversionEditor from '../Components/MainLayout/RightSide/EditorSetting/EmailConversionEditor';
+import {
+	emailData,
+	newData,
+	newEmailData,
+	pageData,
+} from '../lib/Data/pageData';
 const DynamicLoadedEditor = dynamic(
 	import('../Components/TextEditor/TextEditor'),
 	{
@@ -30,27 +32,33 @@ const DynamicLoadedOutput = dynamic(
 
 const toEmail = () => {
 	return (
-		<div>
-			<div className="relative w-full flex flex-row ">
-				<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
-				<div className="w-full mt-10 md:mt-0 md:w-9/12">
-					<div className={style.bgpattern}>
-						<div className="md:w-full">
-							<DynamicLoadedEditor />
+		<>
+			<section
+				id="Editor"
+				className=" bg-gray-100 scroll-smooth transition-all duration-200 ">
+				<div className="relative w-full h-full flex flex-row transition-all ">
+					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
+					<div className="w-full min-h-auto  md:mt-0 md:w-9/12">
+						<div className=" px-8 py-8 flex flex-col gap-2 bg-gray-100">
+							<div className="md:w-full">
+								<DynamicLoadedEditor />
+							</div>
+							<div className=" text-center">
+								<SouthIcon />
+							</div>
+							<div className="md:w-full">
+								<DynamicLoadedOutput ReadOnly={true} />
+							</div>
 						</div>
-						<div className=" text-center">
-							<SouthIcon />
-						</div>
-						<div className="md:w-full">
-							<DynamicLoadedOutput ReadOnly={true} />
+					</div>
+					<div className=" relative md:w-3/12 md:border-2 bg-white shadow-lg rounded-xl mr-4 my-8 md:px-10 md:py-6">
+						<div className="sticky top-20 mb-4">
+							<EmailConversionEditor currData={newEmailData} />
 						</div>
 					</div>
 				</div>
-				<div className=" md:w-3/12 md:border-l-2 md:px-10 md:py-6">
-					<EditorSetting currData={emailData} />
-				</div>
-			</div>
-		</div>
+			</section>
+		</>
 	);
 };
 

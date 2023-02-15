@@ -2,10 +2,10 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import EditorSetting from '../common/RightSide/EditorSetting';
+import EditorSetting from '../MainLayout/RightSide/EditorSetting/ReviewEditor';
 import style from '../../pages/editor.module.css';
 import SouthIcon from '@mui/icons-material/South';
-import { pageData } from '../pageData';
+import { pageData } from '../../lib/Data/pageData';
 
 const DynamicLoadedEditor = dynamic(import('./TextEditor'), {
 	loading: () => (

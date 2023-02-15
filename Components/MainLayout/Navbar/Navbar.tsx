@@ -16,7 +16,7 @@ import {
 } from '../../../lib/slices/userSlice';
 import { signOut } from 'firebase/auth';
 import { auth, db } from '../../../firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { useRouter } from 'next/router';
 
@@ -27,7 +27,6 @@ const Navbar = () => {
 	const modalHandler = useSelector(
 		(state: any) => state.userControl.userSignInModal
 	);
-
 	const handleOpen = () => {
 		dispatch(OpenModal());
 		console.log(modalHandler);
@@ -35,6 +34,8 @@ const Navbar = () => {
 	const handleClose = () => dispatch(CloseModal());
 	const userPhoto = useSelector((state: any) => state.userControl.userPhoto);
 	const userFuel = useSelector((state: any) => state.userControl.userFuel);
+	const userUID = useSelector((state: any) => state.userControl.userUID);
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -49,7 +50,30 @@ const Navbar = () => {
 			dispatch(SetUserUID(userData.uid));
 		}
 		console.log(userData);
-	}, []);
+	}, [userUID]);
+
+	useEffect(() => {
+		// console.log(userUID);
+		// if (localStorage.getItem(userFuel) != null) {
+		// 	dispatch(ShowUserFuel(localStorage.getItem('userFuel')));
+		// }
+		const userData = JSON.parse(localStorage.getItem('user') as string);
+
+		if (userData != null) {
+			onSnapshot(
+				doc(db, 'UsersFuel', userData.uid),
+				doc => {
+					console.log('Current data: ', doc.data());
+					dispatch(ShowUserFuel(doc.data()?.fuel));
+					localStorage.setItem('userFuel', doc.data()?.fuel);
+					// setUserFuel(doc.data()?.fuel);
+				},
+				error => {
+					console.log(error);
+				}
+			);
+		}
+	}, [userFuel, userUID]);
 
 	const handleSignOut = () => {
 		signOut(auth)
@@ -70,11 +94,10 @@ const Navbar = () => {
 	function renderSwitch(param: string) {
 		switch (param) {
 			case '/':
-				return 'Proofreading';
+				return 'Revise';
 			case '/toEmail':
 				return 'Email Conversion';
-			case '/rephraser':
-				return 'Paraphrase';
+
 			default:
 				return ' ';
 		}
@@ -101,7 +124,7 @@ const Navbar = () => {
 				<Link
 					href="/"
 					className="flex flex-row gap-4 items-center">
-					<span className="text-xl font-bold">Sumnur</span>
+					<span className="text-xl font-bold">Sorsay</span>
 				</Link>
 				<div className="flex gap-4 items-center">
 					<span className="hover:scale-105 transition-all duration-100">

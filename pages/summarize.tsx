@@ -11,18 +11,11 @@ import { newData, pageData } from '../lib/Data/pageData';
 import RephraseEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
 import ReviewEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
 import { quickStart } from '../lib/Translation';
+import SummarizeEditor from '../Components/MainLayout/RightSide/EditorSetting/SumarizeEditor';
+import { sumData } from '../lib/Data/summarizeData';
 
 const DynamicLoadedEditor = dynamic(
-	import('../Components/TextEditor/TextEditor'),
-	{
-		loading: () => (
-			<div className="p-10 w-full h-[300px] shadow-lg flex gap-8 border-2 rounded-md bg-white"></div>
-		),
-		ssr: false,
-	}
-);
-const DynamicLoadedOutput = dynamic(
-	import('../Components/TextEditor/TextOutput'),
+	import('../Components/TextEditor/TextEditor2'),
 	{
 		loading: () => (
 			<div className="p-10 w-full h-[300px] shadow-lg flex gap-8 border-2 rounded-md bg-white"></div>
@@ -36,25 +29,21 @@ const Home: NextPage = () => {
 		<>
 			<section
 				id="Editor"
-				className=" bg-gray-100 scroll-smooth h-full transition-all duration-200 ">
+				className=" scroll-smooth transition-all duration-200 ">
 				<div className="relative w-full h-full flex flex-row transition-all ">
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
-					<div className="w-full min-h-auto  md:mt-0 md:w-9/12">
-						<div className=" px-8 py-8 flex flex-col gap-2 bg-gray-100">
-							<div className="md:w-full">
+					<div className="pb-8 w-full min-h-[92vh] md:mt-0 md:w-9/12">
+						<div className=" flex flex-col gap-2">
+							<div className="">
 								<DynamicLoadedEditor />
 							</div>
-							<div className=" text-center">
-								<SouthIcon />
-							</div>
-							<div className="md:w-full">
-								<DynamicLoadedOutput ReadOnly={true} />
-							</div>
+
+							<div className=" mx-10 px-10 py-8  h-[300px] shadow-lg flex gap-8 border-2 rounded-xl bg-white"></div>
 						</div>
 					</div>
-					<div className=" relative md:w-3/12 md:border-2 bg-white shadow-lg rounded-xl mr-4 my-8 md:px-10 md:py-6">
+					<div className=" relative md:w-3/12 md:border bg-white shadow-lg rounded-xl mr-2 my-8 md:px-10 md:py-6">
 						<div className="sticky top-20 mb-4">
-							<ReviewEditor currData={newData} />
+							<SummarizeEditor currData={sumData} />
 						</div>
 					</div>
 				</div>

@@ -2,21 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { compareString } from '../../../lib/CompareString';
 import {
+	DetectLanguage,
 	recieveOutput,
 	setButtonAnime,
 	setNewInputWrong,
 	submitGrammar,
 } from '../../../lib/slices/textSlice';
-import {
-	addDoc,
-	collection,
-	doc,
-	getDoc,
-	increment,
-	runTransaction,
-	updateDoc,
-} from 'firebase/firestore';
-import { db } from '../../../firebase';
+
 import {
 	CloseNoFuelModal,
 	OpenModal,
@@ -24,74 +16,27 @@ import {
 } from '../../../lib/slices/userSlice';
 import { Modal } from '@mui/material';
 import InsufficientFuel from './InsufficientFuel';
+import { RemoveLeadingSpaces } from '../../../lib/RemoveLeadingSpaces';
+import { RemoveNewLines } from '../../../lib/RemoveNewLines';
 
 interface Options {
 	id: number;
 	name: string;
 	api: string;
 }
-interface PageData {
-	id: number;
-	title: string;
-	subheading: string;
-	Option: Options[];
-}
 
-interface Props {
-	currData: PageData;
-}
-const removeNewLines = (str: string) => {
-	return str.replace(/^\n\n/, '');
-};
 interface SubmitProps {
 	changeAPI: string;
 	fuelCost: number;
+	Options: any;
 }
 
-const removeLeadingSpaces = (str: string): string => {
-	return str.replace(/^\s*\n|^\s*/g, '');
-};
-
-//update to database might change to transaction in the future
-// async function FuelTransaction(userUID: string, fuelCost: number) {
-// 	let result = false;
-// 	if (userUID == null) return;
-// 	try {
-// 		const fuelRef = doc(db, 'UsersFuel', userUID);
-// 		await runTransaction(db, async transaction => {
-// 			const fuelDoc = await transaction.get(fuelRef);
-// 			if (!fuelDoc.exists()) {
-// 				throw 'Document does not exist!';
-// 				//add create user acc merge
-// 			}
-// 			if (fuelDoc.data().fuel < fuelCost) {
-// 				console.log('Insufficent fund');
-// 				result = false;
-// 				throw 'Insufficient fund';
-// 				//add error modal
-// 			}
-
-// 			transaction.update(fuelRef, { fuel: increment(-fuelCost) });
-// 			result = true;
-// 		});
-// 		console.log('Transaction successfully committed!');
-// 	} catch (e) {
-// 		console.log('Transaction failed: ', e);
-// 		//error modal
-// 	}
-// 	return result;
-// }
-
-const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
-	const [disableBtn, setDisableBtn] = useState(false);
+const SubmitButton = ({ changeAPI, Options, fuelCost }: SubmitProps) => {
 	const dispatch = useDispatch();
 	// const API = useSelector((state: any) => state.textControl.apiPath);
 	const Input = useSelector((state: any) => state.textControl.inputString);
 	const btnAnimate = useSelector((state: any) => state.textControl.btnAnime);
 	const loginBool = useSelector((state: any) => state.userControl.userLogin);
-	const userFuel = useSelector((state: any) => state.userControl.userFuel);
-	const [reUserFuel, setReUserFuel] = useState<number>(0);
-	const [sufficientFuel, SetSufficientFuel] = useState<boolean>(true);
 	let cleanOutput;
 
 	const modalHandler = useSelector(
@@ -103,17 +48,6 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 	};
 
 	const handleClose = () => dispatch(CloseNoFuelModal());
-	//get data from firestore
-	// const [userFuel, setUserFuel] = useState<any>(0);
-
-	// useEffect(() => {
-	// 	setReUserFuel(userFuel);
-	// 	if (reUserFuel < fuelCost) {
-	// 		SetSufficientFuel(false);
-	// 	} else {
-	// 		SetSufficientFuel(true);
-	// 	}
-	// }, [userFuel]);
 
 	const handleKeyDown = async () => {
 		//prevent random brekaline
@@ -123,24 +57,8 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 		dispatch(recieveOutput(' '));
 		dispatch(setButtonAnime());
 
-		//commit to database
-		// const fuelChecking = await FuelTransaction(
-		// 	JSON.parse(localStorage.getItem('user') as string).uid,
-		// 	fuelCost
-		// );
-
-		// if (!fuelChecking) {
-		// 	dispatch(setButtonAnime());
-		// 	handleOpen();
-		// 	//pop up modal
-		// 	return;
-		// }
-		//return error
-
-		// checkAPi it work
-		// console.log(changeAPI);
-		//so openai wont break
-		const pureString = removeLeadingSpaces(Input);
+		//so openai wont break and start being concious
+		const pureString = RemoveLeadingSpaces(Input);
 		const response = await fetch(changeAPI, {
 			method: 'POST',
 			headers: {
@@ -150,13 +68,15 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 			body: JSON.stringify({
 				userUID: JSON.parse(localStorage.getItem('user') as string).uid,
 				fuelCost: fuelCost,
-				changeAPI: changeAPI,
 				text: pureString,
+				//rename soon to full option so it customizable
+				options: Options, //option has any so it scalable
 			}),
 		});
-
+		console.log(Options);
 		const data = await response.json();
 
+		dispatch(DetectLanguage(data.lang));
 		// send to back end
 		// console.log(JSON.stringify({ data }));
 
@@ -164,19 +84,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 		dispatch(setNewInputWrong(inputWrong));
 		//send data to UI
 		cleanOutput = data.result.choices[0].text;
-		dispatch(recieveOutput(removeNewLines(cleanOutput)));
-
-		// dispatch(
-		// 	tokenCal(
-		// 		data.result.usage.prompt_tokens +
-		// 			' ' +
-		// 			data.result.usage.completion_tokens +
-		// 			' ' +
-		// 			data.result.usage.total_tokens
-		// 	)
-		// );
-		// dispatch(tokenCal(data.result.usage.total_tokens));
-		// console.log('working api');
+		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
 
 		//animation
 		dispatch(setButtonAnime());
@@ -187,7 +95,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 			{!loginBool ? (
 				<>
 					<button
-						className=" top-40 w-full border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
+						className=" top-40 w-full border-2 px-6 py-2 text-xl bg-gray-50 flex flex-row justify-center items-center
 					 text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
 					  disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
 						onClick={() => dispatch(OpenModal())}
@@ -198,7 +106,7 @@ const SubmitButton = ({ changeAPI, fuelCost }: SubmitProps) => {
 			) : (
 				<>
 					<button
-						className=" top-40 w-full border-2 px-6 py-2 text-xl bg-white flex flex-row justify-center items-center
+						className=" top-40 w-full border-2 px-6 py-2 text-xl bg-gray-50 flex flex-row justify-center items-center
 					 text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
 					  disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
 						onClick={handleKeyDown}

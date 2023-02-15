@@ -2,9 +2,9 @@ import Card from '../Components/Home/partials/Card';
 import React, { useEffect, useState } from 'react';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import { NumericFormat } from 'react-number-format';
-import { PricingData } from '../Components/Home/partials/PricingData';
 import { useSelector } from 'react-redux';
 import Paypal from '../Components/Payment/Paypal';
+import { PricingData } from '../lib/Data/PricingData';
 
 interface plan {
 	name: string;

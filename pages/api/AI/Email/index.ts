@@ -31,7 +31,7 @@ export default async function handler(
 		}
 		const response = await openai.createCompletion({
 			model: 'text-davinci-003',
-			prompt: `Convert this to standard business Email: {${req.body.text}}`,
+			prompt: `Write an email to '[Name]' about the input text. Include a greeting, the main message, and a closing: "${req.body.text}"`,
 			max_tokens: 1000,
 			temperature: 0.7,
 		});

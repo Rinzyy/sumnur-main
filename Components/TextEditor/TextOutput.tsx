@@ -36,6 +36,7 @@ const TextEditor = ({ ReadOnly }: prop) => {
 	const editor = useMemo(() => withReact(createEditor()), []);
 	const [count, setCount] = useState<number>(0);
 
+	let readBool = ReadOnly;
 	const initialValue: Descendant[] = useMemo(
 		() =>
 			JSON.parse(localStorage.getItem('outputContent') as string) || [
@@ -72,7 +73,7 @@ const TextEditor = ({ ReadOnly }: prop) => {
 		];
 		setValue(recievedOutPut);
 		wordcount(OutPut);
-
+		readBool = false;
 		// Transforms.removeNodes(editor, { at: [0] });
 		// Transforms.insertNodes(editor, deserialize(document.body));
 	}, [OutPut]);
@@ -102,10 +103,7 @@ const TextEditor = ({ ReadOnly }: prop) => {
 					{count + ((count as number) > 1 ? ' words' : ' word')}
 				</span>
 
-				<Editable
-					readOnly={ReadOnly as boolean}
-					className=" min-h-[300px] bg-white rounded-md border-2 border-gray shadow-lg px-10 py-8 focus:border-primary "
-				/>
+				<Editable className=" min-h-[300px] bg-white rounded-xl border-2 border-gray shadow-lg px-10 py-8 focus:border-primary " />
 			</Slate>
 		</div>
 	);

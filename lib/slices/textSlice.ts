@@ -10,6 +10,7 @@ export const textSlice = createSlice({
 		apiPath: '',
 		totalToken: '',
 		btnAnime: false,
+		langDetection: '',
 	},
 
 	reducers: {
@@ -24,6 +25,10 @@ export const textSlice = createSlice({
 		recieveOutput: (state, action) => {
 			state.outputString = action.payload;
 			// console.log(state.outputString);
+		},
+		DetectLanguage: (state, action) => {
+			state.langDetection = action.payload;
+			// console.log(state.inputString);
 		},
 		setNewInputWrong: (state, action) => {
 			state.inputWrong = action.payload;
@@ -49,5 +54,6 @@ export const {
 	setNewAPI,
 	tokenCal,
 	setButtonAnime,
+	DetectLanguage,
 } = textSlice.actions;
 export default textSlice.reducer;

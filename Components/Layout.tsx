@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import Footer from './common/Footer/Footer';
-import Landing from './common/Landing/Landing';
-import Navbar from './common/Navbar/Navbar';
+import Footer from './MainLayout/Footer/Footer';
+import Landing from './MainLayout/Landing/Landing';
+import Navbar from './MainLayout/Navbar/Navbar';
 import EditorLayout from './EditorLayout';
 
 type prop = {

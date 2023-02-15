@@ -1,0 +1,85 @@
+/*
+										//--Submitbutton.tsx--//
+const handleKeyDown = async () => {
+	//prevent random brekaline
+	dispatch(submitGrammar());
+
+	//tell the user it loading in textoutput
+	dispatch(recieveOutput(' '));
+	dispatch(setButtonAnime());
+
+	//commit to database
+	// const fuelChecking = await FuelTransaction(
+	// 	JSON.parse(localStorage.getItem('user') as string).uid,
+	// 	fuelCost
+	// );
+
+	// if (!fuelChecking) {
+	// 	dispatch(setButtonAnime());
+	// 	handleOpen();
+	// 	//pop up modal
+	// 	return;
+	// }
+	//return error
+
+	// checkAPi it work
+	// console.log(changeAPI);
+	//so openai wont break
+
+	const pureString = RemoveLeadingSpaces(Input);
+	const response = await fetch(changeAPI, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		//send to backeend
+		body: JSON.stringify({
+			userUID: JSON.parse(localStorage.getItem('user') as string).uid,
+			fuelCost: fuelCost,
+			text: pureString,
+			//rename soon to full option so it customizable
+			options: Options, //option has any so it scalable
+		}),
+	});
+
+	const data = await response.json();
+
+	// send to back end
+	// console.log(JSON.stringify({ data }));
+
+	let inputWrong = compareString(Input, data.result.choices[0].text);
+	dispatch(setNewInputWrong(inputWrong));
+	//send data to UI
+	cleanOutput = data.result.choices[0].text;
+	dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
+
+	// dispatch(
+	// 	tokenCal(
+	// 		data.result.usage.prompt_tokens +
+	// 			' ' +
+	// 			data.result.usage.completion_tokens +
+	// 			' ' +
+	// 			data.result.usage.total_tokens
+	// 	)
+	// );
+	// dispatch(tokenCal(data.result.usage.total_tokens));
+	// console.log('working api');
+
+	//animation
+	dispatch(setButtonAnime());
+
+
+		// dispatch(
+		// 	tokenCal(
+		// 		data.result.usage.prompt_tokens +
+		// 			' ' +
+		// 			data.result.usage.completion_tokens +
+		// 			' ' +
+		// 			data.result.usage.total_tokens
+		// 	)
+		// );
+		// dispatch(tokenCal(data.result.usage.total_tokens));
+		// console.log('working api');
+};
+
+*/

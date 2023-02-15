@@ -32,11 +32,58 @@ async function FuelTransaction(userUID: string, fuelCost: number) {
 	return result;
 }
 
+interface resultArray {
+	intent: string;
+	tone: string;
+	power: string;
+}
+
+function CheckingRequest(
+	intent: string,
+	tone: string,
+	power: string,
+	resultArray: resultArray
+) {
+	switch (intent) {
+		case 'Describe':
+			resultArray.intent = 'describe test';
+			break;
+	}
+
+	switch (tone) {
+		case 'Describe':
+			resultArray.tone = 'describe test';
+			break;
+	}
+
+	switch (power) {
+		case 'Describe':
+			resultArray.power = 'describe test';
+			break;
+	}
+}
+
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
 	try {
+		let finalPrompt: resultArray = {
+			intent: '',
+			tone: '',
+			power: '',
+		};
+
+		CheckingRequest(
+			// req.body.option,
+			req.body.intent,
+			req.body.tone,
+			req.body.power,
+			finalPrompt
+		);
+
+		console.log(finalPrompt);
+
 		FuelTransaction(req.body.userUID, req.body.fuelCost);
 
 		const response = await fetch('https://sumnur.com/api/AI/General', {

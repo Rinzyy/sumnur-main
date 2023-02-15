@@ -4,7 +4,7 @@ import Paypal from '../../Payment/Paypal';
 import EastIcon from '@mui/icons-material/East';
 import Card from './Card';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
-import { PricingData } from './PricingData';
+import { PricingData } from '../../../lib/Data/PricingData';
 
 const Pricing = () => {
 	return (

@@ -40,7 +40,7 @@ function incrementFuel(wordNum: number) {
 
 //get only the string
 
-const TextEditor = () => {
+const TextEditor2 = () => {
 	const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 	const inputWrong = useSelector((state: any) => state.textControl.inputWrong);
 	const OutPut = useSelector((state: any) => state.textControl.outputString);
@@ -164,7 +164,7 @@ const TextEditor = () => {
 					dispatch(OnChangeInput(serialize(value)));
 				}}>
 				<div
-					className={`absolute top-2 right-4 z-10 text-sm  ${
+					className={`absolute top-10 right-10 z-10 text-sm  ${
 						count != 0 ? 'text-gray-500' : 'text-gray-400'
 					} `}>
 					{lang == '' ? (
@@ -183,7 +183,7 @@ const TextEditor = () => {
 					spellCheck
 					autoFocus
 					renderLeaf={renderLeaf}
-					className=" min-h-[300px] bg-white rounded-xl border-2 border-gray shadow-lg px-10 py-8 focus:border-primary "
+					className=" min-h-[360px] bg-white px-16 py-20 "
 					onKeyDown={event => {
 						//fix backspace line error omg
 						if (event.key == 'Backspace') {
@@ -199,4 +199,4 @@ const TextEditor = () => {
 	);
 };
 
-export default TextEditor;
+export default TextEditor2;
