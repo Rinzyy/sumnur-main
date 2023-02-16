@@ -13,6 +13,9 @@ module.exports = {
 				mainDark: '#130b43',
 				light: '#f7f6fa',
 			},
+			transitionProperty: {
+				height: 'height',
+			},
 		},
 	},
 	plugins: [require('flowbite/plugin')],

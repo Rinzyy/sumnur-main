@@ -7,6 +7,8 @@ export const textSlice = createSlice({
 		finalInput: '',
 		inputWrong: `<p> </p>`,
 		outputString: 'Hello, Type your text above',
+		listSummarizedString: '',
+		summarizedString: '',
 		apiPath: '',
 		totalToken: '',
 		btnAnime: false,
@@ -24,6 +26,14 @@ export const textSlice = createSlice({
 		},
 		recieveOutput: (state, action) => {
 			state.outputString = action.payload;
+			// console.log(state.outputString);
+		},
+		recievedSummarized: (state, action) => {
+			state.summarizedString = action.payload;
+			// console.log(state.outputString);
+		},
+		recievedListSummarized: (state, action) => {
+			state.listSummarizedString = action.payload;
 			// console.log(state.outputString);
 		},
 		DetectLanguage: (state, action) => {
@@ -50,6 +60,8 @@ export const {
 	OnChangeInput,
 	submitGrammar,
 	recieveOutput,
+	recievedSummarized,
+	recievedListSummarized,
 	setNewInputWrong,
 	setNewAPI,
 	tokenCal,

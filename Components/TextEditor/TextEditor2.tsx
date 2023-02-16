@@ -40,7 +40,7 @@ function incrementFuel(wordNum: number) {
 
 //get only the string
 
-const TextEditor2 = () => {
+const TextEditor2 = (bool: any) => {
 	const editor = useMemo(() => withHistory(withReact(createEditor())), []);
 	const inputWrong = useSelector((state: any) => state.textControl.inputWrong);
 	const OutPut = useSelector((state: any) => state.textControl.outputString);
@@ -137,6 +137,7 @@ const TextEditor2 = () => {
 
 		// setValue(deserialize(document.body));
 	}, [inputWrong]);
+	console.log(bool);
 
 	return (
 		<div className="relative">
@@ -183,7 +184,7 @@ const TextEditor2 = () => {
 					spellCheck
 					autoFocus
 					renderLeaf={renderLeaf}
-					className=" min-h-[360px] bg-white px-16 py-20 "
+					className=" min-h-[300px] bg-white rounded-xl border-2 border-gray shadow-lg px-10 py-8 focus:border-primary "
 					onKeyDown={event => {
 						//fix backspace line error omg
 						if (event.key == 'Backspace') {

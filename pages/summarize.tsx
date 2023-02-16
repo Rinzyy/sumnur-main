@@ -2,18 +2,11 @@ import React, { useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
-import style from './editor.module.css';
-import SouthIcon from '@mui/icons-material/South';
 import { NextPage } from 'next';
-import Head from 'next/head';
-import { Fab } from '@mui/material';
-import { newData, pageData } from '../lib/Data/pageData';
-import RephraseEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
-import ReviewEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
-import { quickStart } from '../lib/Translation';
 import SummarizeEditor from '../Components/MainLayout/RightSide/EditorSetting/SumarizeEditor';
 import { sumData } from '../lib/Data/summarizeData';
 
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 const DynamicLoadedEditor = dynamic(
 	import('../Components/TextEditor/TextEditor2'),
 	{
@@ -25,20 +18,51 @@ const DynamicLoadedEditor = dynamic(
 );
 
 const Home: NextPage = () => {
+	const OutPut = useSelector((state: any) => state.textControl.outputString);
+	const summarizedString = useSelector(
+		(state: any) => state.textControl.summarizedString
+	);
+	const listSumString = useSelector(
+		(state: any) => state.textControl.listSummarizedString
+	);
+	let boole = true;
+
 	return (
 		<>
 			<section
 				id="Editor"
-				className=" scroll-smooth transition-all duration-200 ">
+				className=" scroll-smooth transition-all duration-200 bg-gray-100 ">
 				<div className="relative w-full h-full flex flex-row transition-all ">
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
 					<div className="pb-8 w-full min-h-[92vh] md:mt-0 md:w-9/12">
 						<div className=" flex flex-col gap-2">
-							<div className="">
-								<DynamicLoadedEditor />
+							<div className="mx-10 my-8">
+								<DynamicLoadedEditor bool={boole} />
 							</div>
+							<div className={`mx-10 flex flex-col gap-2 `}>
+								<span>Summary</span>
+								<div
+									className={`  px-10 py-8 h-auto ${
+										boole ? 'h-0 opacity-0 ' : ' opacity-1'
+									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 `}>
+									{OutPut}
+								</div>
+								{/* <UnfoldLessIcon className=" self-center" /> */}
+								<div
+									className={`  px-10 py-8 h-auto ${
+										boole ? 'h-0 opacity-0' : ' opacity-1'
+									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 delay-300 `}>
+									{listSumString}
+								</div>
+								{/* <UnfoldLessIcon className=" self-center" /> */}
 
-							<div className=" mx-10 px-10 py-8  h-[300px] shadow-lg flex gap-8 border-2 rounded-xl bg-white"></div>
+								<div
+									className={`  px-10 py-8 h-auto ${
+										boole ? 'h-0 opacity-0' : ' opacity-1'
+									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 delay-700 `}>
+									{summarizedString}
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className=" relative md:w-3/12 md:border bg-white shadow-lg rounded-xl mr-2 my-8 md:px-10 md:py-6">

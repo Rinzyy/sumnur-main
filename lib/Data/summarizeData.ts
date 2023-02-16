@@ -1,6 +1,6 @@
 export const sumData = {
 	id: 1,
-	title: 'Revise',
+	title: 'Summarize',
 	subheading: 'Get the main point fo your text.',
 	Type: [
 		{

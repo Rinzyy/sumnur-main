@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { compareString } from '../../../lib/CompareString';
 import {
 	DetectLanguage,
+	recievedListSummarized,
+	recievedSummarized,
 	recieveOutput,
 	setButtonAnime,
 	setNewInputWrong,
@@ -29,6 +31,24 @@ interface SubmitProps {
 	changeAPI: string;
 	fuelCost: number;
 	Options: any;
+}
+
+//works
+function CheckAPIType(API: any, data: any, dispatch: any) {
+	let cleanOutput;
+	if (API == '/api/AI/Summarize') {
+		cleanOutput = data.superSum.choices[0].text;
+		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
+
+		cleanOutput = data.summarized.choices[0].text;
+		dispatch(recievedSummarized(RemoveNewLines(cleanOutput)));
+
+		cleanOutput = data.list.choices[0].text;
+		dispatch(recievedListSummarized(RemoveNewLines(cleanOutput)));
+	} else {
+		cleanOutput = data.result.choices[0].text;
+		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
+	}
 }
 
 const SubmitButton = ({ changeAPI, Options, fuelCost }: SubmitProps) => {
@@ -80,11 +100,15 @@ const SubmitButton = ({ changeAPI, Options, fuelCost }: SubmitProps) => {
 		// send to back end
 		// console.log(JSON.stringify({ data }));
 
-		let inputWrong = compareString(Input, data.result.choices[0].text);
-		dispatch(setNewInputWrong(inputWrong));
+		//rename this
+		// let inputWrong = compareString(Input, data.result.choices[0].text);
+		// dispatch(setNewInputWrong(inputWrong));
+
+		//how do i fix this only get one data
 		//send data to UI
-		cleanOutput = data.result.choices[0].text;
-		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
+		// cleanOutput = data.result.choices[0].text;
+		// dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
+		CheckAPIType(changeAPI, data, dispatch);
 
 		//animation
 		dispatch(setButtonAnime());
