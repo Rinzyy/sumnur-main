@@ -11,6 +11,7 @@ import { newData, pageData } from '../lib/Data/pageData';
 import RephraseEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
 import ReviewEditor from '../Components/MainLayout/RightSide/EditorSetting/ReviewEditor';
 import { quickStart } from '../lib/Translation';
+import EditorLayout from '../Components/EditorLayout';
 
 const DynamicLoadedEditor = dynamic(
 	import('../Components/TextEditor/TextEditor'),
@@ -36,8 +37,9 @@ const Home: NextPage = () => {
 		<>
 			<section
 				id="Editor"
-				className=" bg-gray-100 scroll-smooth h-full transition-all duration-200 ">
+				className=" bg-gray-100 scroll-smooth transition-all duration-200 ">
 				<div className="relative w-full h-full flex flex-row transition-all ">
+					<EditorLayout />
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
 					<div className="w-full min-h-auto  md:mt-0 md:w-9/12">
 						<div className=" px-8 py-8 flex flex-col gap-2 bg-gray-100">
@@ -52,7 +54,7 @@ const Home: NextPage = () => {
 							</div>
 						</div>
 					</div>
-					<div className=" relative md:w-3/12 md:border-2 bg-white shadow-lg rounded-xl mr-4 my-8 md:px-10 md:py-6">
+					<div className=" relative md:w-3/12 md:border-l-2 border-gray-600 bg-white shadow-lg  md:px-8 md:py-6">
 						<div className="sticky top-20 mb-4">
 							<ReviewEditor currData={newData} />
 						</div>

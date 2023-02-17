@@ -119,7 +119,7 @@ const Navbar = () => {
 	return (
 		<nav
 			id="Top"
-			className="fixed top-0 w-full bg-white z-[100] border-b-2">
+			className="fixed top-0 w-full bg-white z-[100] border-b-2 border-gray-600">
 			<div className="flex items-center justify-between px-6 py-4">
 				<Link
 					href="/"
@@ -139,7 +139,7 @@ const Navbar = () => {
 								className="cursor-pointer flex gap-2 items-center justify-center group"
 								onClick={() => dispatch(OpenModal())}>
 								<img
-									className=" rounded-full w-8 h-8 ring-2 ring-offset-2 ring-primary group-hover:scale-110 transition-all duration-200"
+									className=" rounded-md w-8 h-8 ring-2 ring-offset-2 ring-primary group-hover:scale-110 transition-all duration-200"
 									src="/user.jpeg"
 									alt=""
 								/>
@@ -153,7 +153,7 @@ const Navbar = () => {
 									className="flex flex-row items-center justify-center gap-2"
 									onClick={handleClick}>
 									<img
-										className=" rounded-full w-8 h-8 ring-2 ring-offset-2 ring-primary group-hover:scale-110 transition-all duration-200"
+										className=" rounded-md w-8 h-8 ring-2 ring-offset-2 ring-primary group-hover:scale-110 transition-all duration-200"
 										src={userPhoto}
 										referrerPolicy="no-referrer"
 										alt=""

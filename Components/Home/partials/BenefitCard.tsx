@@ -9,7 +9,7 @@ const BenefitCard = ({ title, description, link }: props) => {
 	return (
 		<div className="relative w-full">
 			<div className="p-4 md:w-full">
-				<div className="flex border-2 rounded-lg border-gray-200 border-opacity-50 p-8 sm:flex-row flex-col">
+				<div className="flex border border-gray-600 rounded-lg border-opacity-50 p-8 sm:flex-row flex-col">
 					<div className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
 						<svg
 							fill="none"

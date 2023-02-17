@@ -28,7 +28,7 @@ const OptionChoice = ({ name, option, handleInputChange }: Props) => {
 					id={name}
 					onChange={handleInputChange}
 					defaultValue={option[0].prompt}
-					className=" appearance-none bg-gray-100 border p-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ">
+					className=" appearance-none bg-white border p-2 border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full ">
 					{option.map((item: any) => (
 						<option
 							key={item.id}

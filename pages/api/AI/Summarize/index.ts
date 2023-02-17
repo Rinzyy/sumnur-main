@@ -1,6 +1,11 @@
+import { async } from '@firebase/util';
+import console from 'console';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Configuration, OpenAIApi } from 'openai';
+import { resolve } from 'path';
 import { FuelTransaction } from '../../../../lib/FuelTransactionfb';
+import { removeKeyTakeaways } from '../../../../lib/RemoveSpecificString';
+import { SplitSentence, SplitSentenceKM } from '../../../../lib/splitsentence';
 import { detectLanguage, quickStart } from '../../../../lib/Translation';
 
 const configuration = new Configuration({
@@ -38,7 +43,7 @@ export default async function handler(
 		}
 
 		let detectedLang = await detectLanguage(req.body.text);
-		console.log(detectedLang);
+		// console.log(detectedLang);
 
 		let translatedText = req.body.text;
 		let languageIcon = '';
@@ -60,27 +65,66 @@ export default async function handler(
 
 		//check fuel if it enough if not return erro
 		FuelTransaction(req.body.userUID, req.body.fuelCost);
-		console.log(req.body.text);
-		//sum
-		// let summarizePrompt = `Summarize the following paragraph in one sentence, capturing the main idea or key takeaway presented in the paragraph: [${req.body.text}]`;
-		let summarizePrompt = `Provide a concise summary of the following text by identifying and presenting its key points. As you summarize, consider the main ideas and supporting details presented in the text, the author's purpose in writing, and be sure to use your own words in the summary. Your goal is to effectively communicate the author's message in a brief and accurate way: [${req.body.text}]`;
-		let summarizedAnswer = await OpenAIRequest(summarizePrompt);
-		console.log(summarizedAnswer.data.choices[0].text);
+		// console.log(req.body.text);
 
-		let forSuperSum = summarizedAnswer;
+		//prompt
+		let summarizePrompt = `Provide a concise summary of the following text by identifying and presenting its key points. As you summarize, consider the main ideas and supporting details presented in the text, the author's purpose in writing, and be sure to use your own words in the summary. Your goal is to effectively communicate the author's message in a brief and accurate way: [${translatedText}]`;
+		let listPrompt = `List down the all key takeaways in bullet points from the following text. Consider the main ideas and supporting details presented in the text, the author's purpose in writing. Your goal is to create a concise and accurate list of the most important takeaways from the text: [${translatedText}]`;
+
+		//call 2 async at once
+		const responses = await Promise.all([
+			OpenAIRequest(summarizePrompt),
+			OpenAIRequest(listPrompt),
+		]);
+		let summarizedAnswer = responses[0];
+		let listAnswer = responses[1];
+
 		//sum of sum
+		let forSuperSum = summarizedAnswer;
 		let superSumPrompt = `Summarize the following paragraph in one sentence, capturing the main idea or key takeaway presented in the paragraph: [${forSuperSum.data.choices[0].text}]`;
 		let superSumAnswer = await OpenAIRequest(superSumPrompt);
-		console.log(superSumAnswer.data.choices[0].text);
 
-		//list
-		let listPrompt = `List down the key takeaways from the following text. Consider the main ideas and supporting details presented in the text, the author's purpose in writing. Your goal is to create a concise and accurate list of the most important takeaways from the text: [${req.body.text}]`;
-		let listAnswer = await OpenAIRequest(listPrompt);
+		//cleaning object to be string for frontend
+		let cleanSummarized = summarizedAnswer.data.choices[0].text;
+		let cleanList = listAnswer.data.choices[0].text;
+		let cleanSuperSum = superSumAnswer.data.choices[0].text;
+		let splitCleanList = SplitSentence(cleanList as string);
+		splitCleanList['sentence_1'] = removeKeyTakeaways(
+			splitCleanList['sentence_1']
+		);
+		if (detectedLang.language == 'km') {
+			// var promises: any = [];
+			//loop cannot run ascyne and wait so when one of the array is finished async it send all the array and doesn't wait for other
+			// Object.keys(splitCleanList).forEach(async (key: any, index: any) => {
+			// 	promises.push(
+			// 		(splitCleanList[key] = await quickStart(splitCleanList[key], 'km'))
+			// 	);
+			// });
+
+			const promises = Object.keys(splitCleanList).map(async (key: any) => {
+				return new Promise(async resolve => {
+					splitCleanList[key] = await quickStart(splitCleanList[key], 'km');
+					resolve(splitCleanList[key]);
+				});
+			});
+
+			const translatedResponses = await Promise.all([
+				quickStart(cleanSummarized, 'km'),
+				quickStart(cleanSuperSum, 'km'),
+			]);
+			//wait for loop async to finish all of it array
+			await Promise.all(promises);
+			console.log(promises);
+
+			cleanSummarized = translatedResponses[0];
+			cleanSuperSum = translatedResponses[1];
+		}
+
 		//works
 		res.status(200).json({
-			summarized: summarizedAnswer.data,
-			superSum: superSumAnswer.data,
-			list: listAnswer.data,
+			summarized: cleanSummarized,
+			superSum: cleanSuperSum,
+			list: splitCleanList,
 			lang: languageIcon,
 		});
 	} catch (error) {

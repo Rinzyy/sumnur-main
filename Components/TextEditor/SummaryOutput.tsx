@@ -14,7 +14,7 @@ import { Slate, Editable, withReact } from 'slate-react';
 import { ReactEditor } from 'slate-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import style from './textoutput.module.css';
+import style from './SummaryOutput.module.css';
 type CustomElement = { type: 'paragraph'; children: CustomText[] };
 type CustomText = { text: string };
 
@@ -29,8 +29,10 @@ declare module 'slate' {
 	}
 }
 
-const TextOutput = ({ ReadOnly }: prop) => {
-	const OutPut = useSelector((state: any) => state.textControl.outputString);
+const SummaryOutput = ({ ReadOnly }: prop) => {
+	const listSummarizedString = useSelector(
+		(state: any) => state.textControl.listSummarizedString
+	);
 	const animation = useSelector((state: any) => state.textControl.btnAnimate);
 	const dispatch = useDispatch();
 	const editor = useMemo(() => withReact(createEditor()), []);
@@ -42,7 +44,7 @@ const TextOutput = ({ ReadOnly }: prop) => {
 			JSON.parse(localStorage.getItem('outputContent') as string) || [
 				{
 					type: 'paragraph',
-					children: [{ text: 'Type your text here!' }],
+					children: [{ text: '' }],
 				},
 			],
 		[]
@@ -68,15 +70,15 @@ const TextOutput = ({ ReadOnly }: prop) => {
 		const recievedOutPut: Descendant[] = [
 			{
 				type: 'paragraph',
-				children: [{ text: OutPut }],
+				children: [{ text: listSummarizedString }],
 			},
 		];
 		setValue(recievedOutPut);
-		wordcount(OutPut);
+		wordcount(listSummarizedString);
 		readBool = false;
 		// Transforms.removeNodes(editor, { at: [0] });
 		// Transforms.insertNodes(editor, deserialize(document.body));
-	}, [OutPut]);
+	}, [listSummarizedString]);
 	//render twice cause of strictmode nextjs olny in development
 
 	return (
@@ -86,27 +88,28 @@ const TextOutput = ({ ReadOnly }: prop) => {
 				value={value}
 				//change the value since the actual value cannot be changed
 				key={JSON.stringify(value)}
-				onChange={value => {
-					const isAstChange = editor.operations.some(
-						op => 'set_selection' !== op.type
-					);
-					if (isAstChange) {
-						// Save the value to Local Storage.
-						const content = JSON.stringify(value);
-						localStorage.setItem('content', content);
-					}
-				}}>
-				<span
-					className={`absolute top-2 right-4 z-10 text-sm ${
-						count != 0 ? 'text-gray-500' : 'text-gray-400'
-					} `}>
-					{count + ((count as number) > 1 ? ' words' : ' word')}
+				// onChange={value => {
+				// 	const isAstChange = editor.operations.some(
+				// 		op => 'set_selection' !== op.type
+				// 	);
+				// 	if (isAstChange) {
+				// 		// Save the value to Local Storage.
+				// 		const content = JSON.stringify(value);
+				// 		localStorage.setItem('content', content);
+				// 	}
+				// }}
+			>
+				<span className={`absolute top-2 left-4 z-10 text-sm text-gray-500 `}>
+					Key Points
 				</span>
 
-				<Editable className=" min-h-[300px]  bg-white rounded-md border-2 border-gray-600 shadow-lg px-10 py-8 focus:border-mainDark" />
+				<Editable
+					readOnly
+					className=" h-auto bg-white rounded-md border-2 border-gray-600 shadow-lg px-10 py-8 focus:border-mainDark"
+				/>
 			</Slate>
 		</div>
 	);
 };
 
-export default TextOutput;
+export default SummaryOutput;

@@ -18,8 +18,10 @@ import {
 } from '../../../lib/slices/userSlice';
 import { Modal } from '@mui/material';
 import InsufficientFuel from './InsufficientFuel';
-import { RemoveLeadingSpaces } from '../../../lib/RemoveLeadingSpaces';
-import { RemoveNewLines } from '../../../lib/RemoveNewLines';
+import {
+	RemoveLeadingSpaces,
+	RemoveNewLines,
+} from '../../../lib/RemoveSpecificString';
 
 interface Options {
 	id: number;
@@ -37,16 +39,16 @@ interface SubmitProps {
 function CheckAPIType(API: any, data: any, dispatch: any) {
 	let cleanOutput;
 	if (API == '/api/AI/Summarize') {
-		cleanOutput = data.superSum.choices[0].text;
+		cleanOutput = data.superSum;
 		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
 
-		cleanOutput = data.summarized.choices[0].text;
+		cleanOutput = data.summarized;
 		dispatch(recievedSummarized(RemoveNewLines(cleanOutput)));
 
-		cleanOutput = data.list.choices[0].text;
-		dispatch(recievedListSummarized(RemoveNewLines(cleanOutput)));
+		cleanOutput = data.list;
+		dispatch(recievedListSummarized(cleanOutput));
 	} else {
-		cleanOutput = data.result.choices[0].text;
+		cleanOutput = data.result;
 		dispatch(recieveOutput(RemoveNewLines(cleanOutput)));
 	}
 }
@@ -131,7 +133,7 @@ const SubmitButton = ({ changeAPI, Options, fuelCost }: SubmitProps) => {
 				<>
 					<button
 						className=" top-40 w-full border-2 px-6 py-2 text-xl bg-gray-50 flex flex-row justify-center items-center
-					 text-[#604fcd] border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-100 hover:font-bold
+					 text-primary border-[#604fcd] rounded-md shadow-md hover:scale-102 active:scale-95 transition-all duration-300 hover:bg-gray-200 
 					  disabled:cursor-not-allowed disabled:opacity-50 disabled:active:scale-100"
 						onClick={handleKeyDown}
 						disabled={btnAnimate}>

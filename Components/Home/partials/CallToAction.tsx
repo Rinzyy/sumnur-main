@@ -19,7 +19,7 @@ const CallToAction = () => {
 	};
 	return (
 		<div className="absolute -bottom-20 left-1/2 transform -translate-x-1/2 ">
-			<div className="rounded-xl p-10 w-[100%] lg:w-[1028px] bg-white shadow-lg flex flex-col items-center gap-8">
+			<div className="rounded-xl border-2 border-gray-600 p-10 w-[100%] lg:w-[1028px] bg-white shadow-lg flex flex-col items-center gap-8">
 				<span className="text-xl whitespace-nowrap md:text-4xl">
 					Improving your Writing Today!
 				</span>

@@ -23,9 +23,7 @@ const Layout: React.FC<prop> = ({ children }) => {
 	return (
 		<>
 			<Navbar />
-			<EditorLayout>
-				<div className="mt-[60px]">{children}</div>
-			</EditorLayout>
+			<div className="mt-[60px]">{children}</div>
 			<Landing />
 			<Footer />
 		</>

@@ -20,39 +20,39 @@ const Features = () => {
 				<h1 className="text-4xl">Our AI Tool will help you</h1>
 			</div>
 			<div className=" grid grid-flow-row md:grid-cols-2 lg:grid-cols-4 items-center justify-evenly gap-8 text-lg m-auto md:mx-10 mt-10">
-				<div className=" relative flex flex-col items-center gap-2 bg-gray-50 border-[6px] border-white  rounded-md p-4 shadow-lg">
+				<div className=" relative flex flex-col items-center gap-2 bg-gray-50 border-2 border-gray-600  rounded-md p-4 shadow-lg">
 					<div className="flex items-center w-64 h-20 lg:w-auto justify-start gap-2">
 						<TaskAltIcon className="text-primary" />
 						<span>Save Countless Hour</span>
 					</div>
-					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-[3px] border-white px-1 pb-1 pt-[4px] rounded-full">
+					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-2 border-gray-600 px-1 pb-1 pt-[4px] rounded-full">
 						<MoreTimeIcon className="text-4xl text-primary" />
 					</div>
 				</div>
-				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-[6px] border-white  rounded-md p-4 shadow-lg">
+				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-2 border-gray-600  rounded-md p-4 shadow-lg">
 					<div className=" flex items-center w-64 h-20 lg:w-auto  justify-start gap-2">
 						<TaskAltIcon className="text-primary" />
 						<span>Improve Readibility</span>
 					</div>
-					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-[3px] border-white px-1 pb-1 pt-[4px] rounded-full">
+					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-2 border-gray-600 px-1 pb-1 pt-[4px] rounded-full">
 						<FactCheckIcon className="text-4xl text-primary" />
 					</div>
 				</div>
-				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-[6px] border-white  rounded-md p-4 shadow-lg">
+				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-2 border-gray-600  rounded-md p-4 shadow-lg">
 					<div className=" flex items-center w-64 h-20 lg:w-auto  justify-start gap-2">
 						<TaskAltIcon className="text-primary" />
 						<span>Improve Writing Confident</span>
 					</div>
-					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-[3px] border-white px-1 pb-1 pt-[4px] rounded-full">
+					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-2 border-gray-600 px-1 pb-1 pt-[4px] rounded-full">
 						<AddReactionIcon className="text-4xl text-primary" />
 					</div>
 				</div>
-				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-[6px] border-white  rounded-md p-4 shadow-lg">
+				<div className="relative flex flex-col items-center gap-2 bg-gray-50 border-2 border-gray-600  rounded-md p-4 shadow-lg">
 					<div className=" flex items-center w-64 h-20 lg:w-auto  justify-start gap-2">
 						<TaskAltIcon className="text-primary" />
 						<span>Increase Credibility</span>
 					</div>
-					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-[3px] border-white px-1 pb-1 pt-[4px] rounded-full">
+					<div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-gray-100 border-2 border-gray-600 px-1 pb-1 pt-[4px] rounded-full">
 						<GppGoodIcon className="text-4xl text-primary" />
 					</div>
 				</div>

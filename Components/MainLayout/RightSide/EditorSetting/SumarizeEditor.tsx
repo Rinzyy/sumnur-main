@@ -23,12 +23,9 @@ const SummarizeEditor = ({ currData }: any) => {
 			<div>
 				<div className="hidden md:block w-full h-full">
 					<div className=" flex gap-4 flex-col">
-						<span className=" text-xl font-bold  text-center">
-							{currData.title}
-						</span>
-						<span className="-mt-4 text-sm text-center">
-							{currData.subheading}
-						</span>
+						<span className=" text-xl font-bold ">{currData.title}</span>
+						<span className="-mt-4 text-sm ">{currData.subheading}</span>
+						<div className="border-t border-gray-600 -mx-8"></div>
 
 						<SubmitButton
 							key={API + 1}

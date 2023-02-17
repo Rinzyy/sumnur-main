@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 
@@ -7,8 +7,23 @@ import SummarizeEditor from '../Components/MainLayout/RightSide/EditorSetting/Su
 import { sumData } from '../lib/Data/summarizeData';
 
 import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import SummarizeOutlinedIcon from '@mui/icons-material/SummarizeOutlined';
+import EditorLayout from '../Components/EditorLayout';
+import Summary from '../Components/Summary/Summary';
+import { TextareaAutosize } from '@mui/material';
+import { stringLength } from '@firebase/util';
+import SummaryList from '../Components/Summary/SummaryList';
 const DynamicLoadedEditor = dynamic(
 	import('../Components/TextEditor/TextEditor2'),
+	{
+		loading: () => (
+			<div className="p-10 w-full h-[300px] shadow-lg flex gap-8 border-2 rounded-md bg-white"></div>
+		),
+		ssr: false,
+	}
+);
+const DynamicLoadedOutput = dynamic(
+	import('../Components/TextEditor/SummaryOutput'),
 	{
 		loading: () => (
 			<div className="p-10 w-full h-[300px] shadow-lg flex gap-8 border-2 rounded-md bg-white"></div>
@@ -19,6 +34,7 @@ const DynamicLoadedEditor = dynamic(
 
 const Home: NextPage = () => {
 	const OutPut = useSelector((state: any) => state.textControl.outputString);
+	const [op, setOP] = useState('');
 	const summarizedString = useSelector(
 		(state: any) => state.textControl.summarizedString
 	);
@@ -33,39 +49,43 @@ const Home: NextPage = () => {
 				id="Editor"
 				className=" scroll-smooth transition-all duration-200 bg-gray-100 ">
 				<div className="relative w-full h-full flex flex-row transition-all ">
+					<EditorLayout />
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
 					<div className="pb-8 w-full min-h-[92vh] md:mt-0 md:w-9/12">
-						<div className=" flex flex-col gap-2">
-							<div className="mx-10 my-8">
+						<div className="mx-10 my-8 flex flex-col gap-2">
+							<div className="">
 								<DynamicLoadedEditor bool={boole} />
 							</div>
-							<div className={`mx-10 flex flex-col gap-2 `}>
-								<span>Summary</span>
-								<div
-									className={`  px-10 py-8 h-auto ${
-										boole ? 'h-0 opacity-0 ' : ' opacity-1'
-									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 `}>
-									{OutPut}
+							<div className="mt-2"></div>
+							<div className={`relative  flex flex-col gap-2 `}>
+								<div className=" absolute left-1/2 transform -translate-x-1/2 flex flex-col font-extrabold text-gray-200 z-0">
+									<span className="text-[4rem]">Summary</span>
+									<SummarizeOutlinedIcon className=" text-[15rem] text-gray-200 " />
 								</div>
-								{/* <UnfoldLessIcon className=" self-center" /> */}
-								<div
-									className={`  px-10 py-8 h-auto ${
-										boole ? 'h-0 opacity-0' : ' opacity-1'
-									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 delay-300 `}>
-									{listSumString}
-								</div>
-								{/* <UnfoldLessIcon className=" self-center" /> */}
-
-								<div
-									className={`  px-10 py-8 h-auto ${
-										boole ? 'h-0 opacity-0' : ' opacity-1'
-									} shadow-lg flex gap-8 border-2 rounded-xl bg-white transition-all duration-500 delay-700 `}>
-									{summarizedString}
+								<div className=" z-10 flex flex-col gap-2">
+									<Summary
+										title={'Main Idea'}
+										bool={boole}
+										OutPut={OutPut}
+										delayTime={'delay-100'}
+									/>
+									<SummaryList
+										title={'Key Points'}
+										bool={boole}
+										OutPut={listSumString}
+										delayTime={'delay-300'}
+									/>
+									<Summary
+										title={'Summary'}
+										bool={boole}
+										OutPut={summarizedString}
+										delayTime={'delay-500'}
+									/>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div className=" relative md:w-3/12 md:border bg-white shadow-lg rounded-xl mr-2 my-8 md:px-10 md:py-6">
+					<div className=" relative md:w-3/12 md:border-l-2 border-gray-600 bg-white  md:px-8 md:py-6">
 						<div className="sticky top-20 mb-4">
 							<SummarizeEditor currData={sumData} />
 						</div>

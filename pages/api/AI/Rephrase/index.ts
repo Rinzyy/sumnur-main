@@ -13,7 +13,7 @@ async function OpenAIRequest(prompt: string) {
 	const response = await openai.createCompletion({
 		model: 'text-davinci-003',
 		prompt: prompt,
-		max_tokens: 1000,
+		max_tokens: 2000,
 		temperature: 0,
 	});
 	return response;
@@ -115,10 +115,12 @@ export default async function handler(
 
 		let finalPrompt = `${instruct} the following text to make it more clear, concise,grammatically correct and easily understandable for a general audience,${intent}${tone}: [${translatedText}]`;
 		let response = await OpenAIRequest(finalPrompt);
+
+		let cleanOutput = response.data.choices[0].text;
 		//works
 		// console.log(await quickStart(response.data.choices[0].text, 'km'));
 		console.log(finalPrompt);
-		res.status(200).json({ result: response.data, lang: languageIcon });
+		res.status(200).json({ result: cleanOutput, lang: languageIcon });
 	} catch (error) {
 		res.status(400).json({
 			result: {

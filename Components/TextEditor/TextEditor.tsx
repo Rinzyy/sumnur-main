@@ -183,7 +183,7 @@ const TextEditor = () => {
 					spellCheck
 					autoFocus
 					renderLeaf={renderLeaf}
-					className=" min-h-[300px] bg-white rounded-xl border-2 border-gray shadow-lg px-10 py-8 focus:border-primary "
+					className=" min-h-[300px] bg-white rounded-md border-2 border-gray-600 shadow-lg px-10 py-8 focus:border-primary"
 					onKeyDown={event => {
 						//fix backspace line error omg
 						if (event.key == 'Backspace') {

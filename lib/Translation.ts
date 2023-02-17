@@ -11,8 +11,8 @@ let test;
 export async function quickStart(text: any, target: any) {
 	// Translates some text into Russian
 	const [translation] = await translate.translate(text, target);
-	console.log(`Text: ${text}`);
-	console.log(`Translation: ${translation}`);
+	// console.log(`Text: ${text}`);
+	// console.log(`Translation: ${translation}`);
 	return translation;
 }
 

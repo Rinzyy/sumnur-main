@@ -25,7 +25,7 @@ const data = [
 const Benefit = () => {
 	return (
 		<section>
-			<div className="bg-white  flex flex-col gap-10 py-10">
+			<div className="bg-white border-y-2 border-gray-600  flex flex-col gap-10 py-10">
 				<div className="flex items-center justify-center mt-10">
 					<span className=" border-primary border rounded-full p-2 text-primary">
 						Services

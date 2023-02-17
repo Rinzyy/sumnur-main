@@ -35,7 +35,9 @@ export default async function handler(
 			max_tokens: 1000,
 			temperature: 0.7,
 		});
-		res.status(200).json({ result: response.data });
+		let cleanOutput = response.data.choices[0].text;
+
+		res.status(200).json({ result: cleanOutput });
 	} catch (error) {
 		res.status(400).json({
 			result: {

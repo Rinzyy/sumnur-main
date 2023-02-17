@@ -7,7 +7,7 @@ import { Accordion, Tooltip } from 'flowbite-react';
 import OptionChoice from '../Options/OptionChoice';
 import OptionRadio from '../Options/OptionRadio';
 import { OptionData } from '../../../../lib/interfaces/RephraseInterface';
-
+import EditIcon from '@mui/icons-material/Edit';
 const ReviewEd = ({ currData }: any) => {
 	let RephraseOption = {
 		intent: '',
@@ -87,14 +87,13 @@ const ReviewEd = ({ currData }: any) => {
 			<div>
 				<div className="hidden md:block w-full h-full">
 					<div className=" flex gap-4 flex-col">
-						<span className=" text-xl font-bold  text-center">
-							{currData.title}
-						</span>
-						<span className="-mt-4 text-sm text-center">
-							{currData.subheading}
-						</span>
-						<hr />
-
+						<div className=" flex items-center gap-2">
+							<span className=" text-xl font-bold  ">{currData.title}</span>
+							<EditIcon className="text-[1.5rem]" />
+						</div>
+						<span className="-mt-4 text-sm ">{currData.subheading}</span>
+						<div className="border-t border-gray-600 -mx-8"></div>
+						<span className=" text-xl font-bold  ">Setting</span>
 						<OptionChoice
 							name="Intent"
 							handleInputChange={handleIntentChange}
@@ -105,8 +104,8 @@ const ReviewEd = ({ currData }: any) => {
 							handleInputChange={handleToneChange}
 							option={currData.Option.Tone}
 						/>
-
-						{/* <div className="flex justify-between items-center">
+						{/* 
+						<div className="flex justify-between items-center">
 							<div
 								className={` ${
 									para && gramSpell == false ? 'text-gray-700' : 'text-gray-400'
@@ -172,7 +171,6 @@ const ReviewEd = ({ currData }: any) => {
 								</Accordion.Content>
 							</Accordion.Panel>
 						</Accordion>
-						<hr />
 
 						<SubmitButton
 							key={API + 1}

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
 	return (
-		<div className="relative bg-light border-t-2 px-14 z-[40] pt-20">
+		<div className="relative bg-light border-t-2 border-gray-600 px-14 z-[40] pt-20">
 			<div className="flex flex-row justify-around items-center m-10">
 				<div className="logo">
 					<h3>Sumnur</h3>

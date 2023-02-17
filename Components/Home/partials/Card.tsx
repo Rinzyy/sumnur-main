@@ -31,8 +31,8 @@ const Card = ({ name, amount, price }: props) => {
 				name == 'PRO' ? 'border-primary' : ''
 			}
 			${
-				name == 'STUDENT' ? 'border-gray-400' : ''
-			}  cursor-pointer border-gray-30  flex flex-col justify-start relative overflow-hidden 
+				name == 'STUDENT' ? 'border-gray-700' : ''
+			}  cursor-pointer border-gray-400  flex flex-col justify-start relative overflow-hidden 
             group hover:border-green-400 hover:bg-gray-50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-200`}>
 			<h2 className="text-sm tracking-widest title-font mb-1  group-hover:text-green-400 font-medium">
 				{name}
