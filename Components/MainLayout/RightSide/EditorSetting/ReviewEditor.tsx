@@ -8,10 +8,12 @@ import OptionChoice from '../Options/OptionChoice';
 import OptionRadio from '../Options/OptionRadio';
 import { OptionData } from '../../../../lib/interfaces/RephraseInterface';
 import EditIcon from '@mui/icons-material/Edit';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 const ReviewEd = ({ currData }: any) => {
 	let RephraseOption = {
 		intent: '',
 		tone: '',
+		power: '',
 		isRephrase: false,
 		// isParaphrase: false,
 	};
@@ -24,9 +26,9 @@ const ReviewEd = ({ currData }: any) => {
 	);
 	const [para, setPara] = React.useState<boolean>(false);
 	const [gramSpell, setGramSpell] = React.useState<boolean>(false);
-	// const [power, setPower] = React.useState<string>(
-	// 	currData.Option.Power[1].level
-	// );
+	const [power, setPower] = React.useState<string>(
+		currData.Option.Power[1].level
+	);
 	// const [vocab, setVocab] = React.useState<string>(
 	// 	currData.AdvancedOption.Vocabulary[0].level
 	// );
@@ -61,9 +63,9 @@ const ReviewEd = ({ currData }: any) => {
 		setTone(event.target.value);
 	};
 
-	// const handlePowerChange = (event: any) => {
-	// 	setPower(event.target.value);
-	// };
+	const handlePowerChange = (event: any) => {
+		setPower(event.target.value);
+	};
 
 	//advanced
 	// const handleVocabChange = (event: any) => {
@@ -80,6 +82,7 @@ const ReviewEd = ({ currData }: any) => {
 		RephraseOption.intent = intent;
 		RephraseOption.tone = tone;
 		RephraseOption.isRephrase = gramSpell;
+		RephraseOption.power = power;
 	}, [intent, para, tone, gramSpell]);
 
 	return (
@@ -92,13 +95,9 @@ const ReviewEd = ({ currData }: any) => {
 							<EditIcon className="text-[1.5rem]" />
 						</div>
 						<span className="-mt-4 text-sm ">{currData.subheading}</span>
-						<div className="border-t border-gray-600 -mx-8"></div>
-						<span className=" text-xl font-bold  ">Setting</span>
-						<OptionChoice
-							name="Intent"
-							handleInputChange={handleIntentChange}
-							option={currData.Option.Intent}
-						/>
+						<div className="border-t-2 border-gray "></div>
+						<span className=" text-xl font-bold  ">Setting </span>
+
 						<OptionChoice
 							name="Tone"
 							handleInputChange={handleToneChange}
@@ -125,20 +124,13 @@ const ReviewEd = ({ currData }: any) => {
 							</label>
 						</div> */}
 
-						{/* <OptionRadio
-							name="Paraphrase Type:"
-							defaultVal="Rephrase"
-							Choice={currData.Option.Power}
-							handleInputChange={handlePowerChange}
-						/> */}
-
 						<Accordion
 							className=" border-b-0 divide-y-0 "
 							flush={true}
 							alwaysOpen={true}
 							collapseAll={true}>
 							<Accordion.Panel>
-								<Accordion.Title className="px-0 py-2 bg-white text-sm hover:text-primary">
+								<Accordion.Title className="px-0 py-2 bg-white text-sm hover:text-primary transition-all duration-300">
 									Optional Setting
 								</Accordion.Title>
 								<Accordion.Content className="px-0 py-0 mb-4  ">
@@ -157,10 +149,15 @@ const ReviewEd = ({ currData }: any) => {
 													className={`ml-2 text-sm whitespace-nowrap font-medium cursor-pointer ${
 														gramSpell ? 'text-gray-700' : 'text-gray-400'
 													}`}>
-													Only Detect Grammar and Spelling
+													Only Detect Grammar & Spelling
 												</label>
 											</div>
 										</Tooltip>
+										{/* <OptionChoice
+											name="Intent"
+											handleInputChange={handleIntentChange}
+											option={currData.Option.Intent}
+										/> */}
 										{/* <OptionRadio
 											name="Vocabulary"
 											defaultVal="Simple"

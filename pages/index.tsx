@@ -37,11 +37,11 @@ const Home: NextPage = () => {
 		<>
 			<section
 				id="Editor"
-				className=" bg-gray-100 scroll-smooth transition-all duration-200 ">
+				className="bg-gray-100 scroll-smooth transition-all duration-200 ">
 				<div className="relative w-full h-full flex flex-row transition-all ">
 					<EditorLayout />
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
-					<div className="w-full min-h-auto  md:mt-0 md:w-9/12">
+					<div className="mt-10 w-full min-h-auto  md:mt-0 md:w-9/12">
 						<div className=" px-8 py-8 flex flex-col gap-2 bg-gray-100">
 							<div className="md:w-full">
 								<DynamicLoadedEditor />

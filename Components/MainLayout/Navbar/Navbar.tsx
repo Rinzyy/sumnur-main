@@ -94,9 +94,13 @@ const Navbar = () => {
 	function renderSwitch(param: string) {
 		switch (param) {
 			case '/':
-				return 'Revise';
+				return 'Rephrase';
+			case '/grammar':
+				return 'Grammar Checker';
 			case '/toEmail':
 				return 'Email Conversion';
+			case '/summarize':
+				return 'Summarization';
 
 			default:
 				return ' ';
@@ -122,12 +126,17 @@ const Navbar = () => {
 			className="fixed top-0 w-full bg-white z-[100] border-b-2 border-gray-600">
 			<div className="flex items-center justify-between px-6 py-4">
 				<Link
-					href="/"
+					href={router.pathname}
 					className="flex flex-row gap-4 items-center">
-					<span className="text-xl font-bold">Sorsay</span>
+					<div className="flex flex-row justify-center items-center gap-2">
+						<span className="text-xl font-bold">Sorsay</span>
+						<div className="mt-1 text-xs font-extrabold border-2 border-black p-1 rounded-md">
+							BETA
+						</div>
+					</div>
 				</Link>
 				<div className="flex gap-4 items-center">
-					<span className="hover:scale-105 transition-all duration-100">
+					<span className="transition-all duration-100">
 						{' '}
 						{renderSwitch(router.pathname)}
 					</span>

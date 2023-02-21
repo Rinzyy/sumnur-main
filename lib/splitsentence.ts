@@ -5,7 +5,7 @@ const jsonString = `1. The importance of having a good work-life balance: it can
 const json: any = {};
 
 export function SplitSentence(paragraph: string) {
-	const sentences = paragraph.split('.\n');
+	const sentences = paragraph.split('\n');
 	sentences.forEach((sentence, index) => {
 		json[`sentence_${index + 1}`] = sentence.trim();
 	});

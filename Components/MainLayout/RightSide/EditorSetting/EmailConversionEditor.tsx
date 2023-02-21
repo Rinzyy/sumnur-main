@@ -38,7 +38,7 @@ const EmailConversionEditor = ({ currData }: any) => {
 					<div className=" flex gap-4 flex-col">
 						<span className=" text-xl font-bold ">{currData.title}</span>
 						<span className="-mt-4 text-sm ">{currData.subheading}</span>
-						<div className="border-t border-gray-600 -mx-8"></div>
+						<div className="border-t-2 border-gray"></div>
 						{/* 
 						<OptionChoice
 							name="Intent"

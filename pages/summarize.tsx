@@ -34,14 +34,21 @@ const DynamicLoadedOutput = dynamic(
 
 const Home: NextPage = () => {
 	const OutPut = useSelector((state: any) => state.textControl.outputString);
-	const [op, setOP] = useState('');
+	const [boole, setBoole] = useState(false);
 	const summarizedString = useSelector(
 		(state: any) => state.textControl.summarizedString
 	);
 	const listSumString = useSelector(
 		(state: any) => state.textControl.listSummarizedString
 	);
-	let boole = true;
+
+	useEffect(() => {
+		if (summarizedString != '') {
+			setBoole(true);
+		} else {
+			setBoole(false);
+		}
+	}, [summarizedString]);
 
 	return (
 		<>
@@ -51,7 +58,7 @@ const Home: NextPage = () => {
 				<div className="relative w-full h-full flex flex-row transition-all ">
 					<EditorLayout />
 					<div className="hidden md:block w-12 emptyspaceforsidebar"></div>
-					<div className="pb-8 w-full min-h-[92vh] md:mt-0 md:w-9/12">
+					<div className="mt-10 pb-8 w-full min-h-[92vh] md:mt-0 md:w-9/12">
 						<div className="mx-10 my-8 flex flex-col gap-2">
 							<div className="">
 								<DynamicLoadedEditor bool={boole} />

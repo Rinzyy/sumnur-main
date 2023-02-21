@@ -46,6 +46,8 @@ function CheckAPIType(API: any, data: any, dispatch: any) {
 		dispatch(recievedSummarized(RemoveNewLines(cleanOutput)));
 
 		cleanOutput = data.list;
+		//prevent overlapping list when user enter a new input
+		// dispatch(recievedListSummarized(''));
 		dispatch(recievedListSummarized(cleanOutput));
 	} else {
 		cleanOutput = data.result;
@@ -76,7 +78,9 @@ const SubmitButton = ({ changeAPI, Options, fuelCost }: SubmitProps) => {
 		dispatch(submitGrammar());
 
 		//tell the user it loading in textoutput
-		dispatch(recieveOutput(' '));
+		dispatch(recieveOutput(''));
+		dispatch(recievedListSummarized(''));
+		dispatch(recievedSummarized(''));
 		dispatch(setButtonAnime());
 
 		//so openai wont break and start being concious

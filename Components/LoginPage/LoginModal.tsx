@@ -80,7 +80,17 @@ const LoginPage = ({ closeModal }: Prop) => {
 				// The signed-in user info.
 				user = result.user;
 				console.log(user);
-				localStorage.setItem('user', JSON.stringify(user));
+
+				let savedUser = {
+					uid: user.uid,
+					displayName: user.displayName,
+					email: user.email,
+					photoURL: user.photoURL,
+					createdAt: user.metadata.createdAt,
+					lastLoginAt: user.metadata.lastLoginAt,
+				};
+
+				localStorage.setItem('user', JSON.stringify(savedUser));
 				dispatch(SetUserPhoto(user.photoURL as string));
 				dispatch(SetUserUID(user.uid as string));
 				dispatch(isUserLogin());

@@ -1,12 +1,12 @@
 export const newData = {
 	id: 1,
-	title: 'Revise',
+	title: 'Rephrase',
 	subheading:
-		'Improve your writing coherence, grammar, and structure of the text.',
+		'Edit and Improve the coherence, grammar, and structure of your text.',
 	Type: [
 		{
 			id: 1,
-			name: 'Revise Text',
+			name: 'Rephrase Text',
 			api: '/api/AI/Rephrase',
 		},
 	],
@@ -14,7 +14,7 @@ export const newData = {
 		Intent: [
 			{
 				id: 1,
-				choice: 'Original',
+				choice: 'Auto',
 				prompt: '',
 			},
 			{
@@ -42,7 +42,7 @@ export const newData = {
 		Tone: [
 			{
 				id: 11,
-				choice: 'Original',
+				choice: 'Auto',
 				prompt: '',
 			},
 			{
@@ -64,6 +64,20 @@ export const newData = {
 				id: 44,
 				choice: 'Question',
 				prompt: 'questioning',
+			},
+		],
+		Power: [
+			{
+				level: 'Revise',
+				label: 'Minimal',
+			},
+			{
+				level: 'Rephrase',
+				label: 'Moderate',
+			},
+			{
+				level: 'Paraphrase',
+				label: 'Maximum',
 			},
 		],
 	},

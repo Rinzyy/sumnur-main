@@ -25,9 +25,9 @@ function switchTone(inputTone: string) {
 			tone = ', with formal tone';
 			break;
 		case 'confident':
-			tone = ', with confident tone';
+			tone = ', with informal tone';
 			break;
-		case 'Formal':
+		case 'empathic':
 			tone = ', with with empathetic tone';
 			break;
 		default:
@@ -74,14 +74,16 @@ export default async function handler(
 		//prevent form postman request
 		if (req.body.userUID == null) {
 			res.status(400).json({
-				result: {
-					choices: [
-						{
-							text: `Error no userUID`,
-						},
-					],
-				},
+				result: `Error no userUID`,
 			});
+		}
+
+		//check fuel if it enough if not return erro
+		FuelTransaction(req.body.userUID, req.body.fuelCost);
+
+		//eat up user fuel
+		if (req.body.text == '') {
+			req.body.text = 'Please type ur text above.';
 		}
 
 		//check intents,tone
@@ -105,15 +107,7 @@ export default async function handler(
 			}
 		}
 
-		//check fuel if it enough if not return erro
-		FuelTransaction(req.body.userUID, req.body.fuelCost);
-
-		//eat up user fuel
-		if (req.body.text == '') {
-			req.body.text = 'Please type ur text above.';
-		}
-
-		let finalPrompt = `${instruct} the following text to make it more clear, concise,grammatically correct and easily understandable for a general audience,${intent}${tone}: [${translatedText}]`;
+		let finalPrompt = `${instruct} the following text to make it more clear, concise,grammatically correct and easily understandable for a general audience ${intent}${tone}: "${translatedText}"`;
 		let response = await OpenAIRequest(finalPrompt);
 
 		let cleanOutput = response.data.choices[0].text;
@@ -123,9 +117,7 @@ export default async function handler(
 		res.status(200).json({ result: cleanOutput, lang: languageIcon });
 	} catch (error) {
 		res.status(400).json({
-			result: {
-				choices: [{ text: '\n\n Server Error. Please try again later.' }],
-			},
+			result: '\n\n Server Error. Please try again later.',
 		});
 	}
 
