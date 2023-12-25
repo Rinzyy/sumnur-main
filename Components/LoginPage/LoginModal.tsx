@@ -144,13 +144,6 @@ const LoginPage = ({ closeModal }: Prop) => {
 					Sign in With Google
 				</button>
 
-				<button
-					className=" bg-white h-16 rounded-md border-2 shadow-md border-primary text-mainDark
-					hover:bg-slate-100 active:scale-95 transition-all duration-200"
-					onClick={handleSignIn}>
-					{' '}
-					Sign in with Google
-				</button>
 				{/*
 				<button
 					className=" bg-white h-16 rounded-md border-2 shadow-md border-primary text-mainDark
