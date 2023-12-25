@@ -60,15 +60,17 @@ SERVICE_ACCOUNT_UNIVERSE_DOMAIN=
 
 ## Usage
 
-Revise Tool: Paraphrase and enhance your text to improve readability while correcting writing issues.
+## Revise Tool: 
+Paraphrase and enhance your text to improve readability while correcting writing issues.
 <img width="1369" alt="Screen Shot 2023-12-25 at 6 14 53 PM" src="https://github.com/Rinzyy/sumnur-main/assets/80165041/9bff9865-1e7b-43f1-92ff-f4602f669cb2">
 
-Summary Tool: Summarize text from any language into English, condensing lengthy content into concise summaries.
+## Summary Tool: 
+Summarize text from any language into English, condensing lengthy content into concise summaries.
 <img width="1364" alt="Screen Shot 2023-12-25 at 6 15 50 PM" src="https://github.com/Rinzyy/sumnur-main/assets/80165041/140d6b81-344e-44fe-9b91-7d5f3dc2e29c">
 <img width="1369" alt="Screen Shot 2023-12-25 at 6 16 08 PM" src="https://github.com/Rinzyy/sumnur-main/assets/80165041/a2f1b381-4334-4607-9b08-f7c918d88cf5">
 
-
-Email Converter Tool: Automatically format text into a formal, professional email structure and prevent common email communication mistakes.
+## Email Converter Tool: 
+Automatically format text into a formal, professional email structure and prevent common email communication mistakes.
 <img width="1363" alt="Screen Shot 2023-12-25 at 6 16 42 PM" src="https://github.com/Rinzyy/sumnur-main/assets/80165041/1ad1e43f-6bb2-469b-9491-a722b26a6f75">
 
 ## Contributing
