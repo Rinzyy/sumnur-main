@@ -9,7 +9,7 @@ import { SplitSentence, SplitSentenceKM } from '../../../../lib/splitsentence';
 import { detectLanguage, quickStart } from '../../../../lib/Translation';
 
 const configuration = new Configuration({
-	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
+	organization: process.env.OPENAI_ORG_ID,
 	apiKey: process.env.OPENAI_API_KEY,
 });
 export const openai = new OpenAIApi(configuration);
@@ -47,7 +47,7 @@ export default async function handler(
 			req.body.text = 'Please type ur text above.';
 			//put a return and breakout
 		}
-		if (Object.keys(req.body.text).length < 70) {
+		if (Object.keys(req.body.text).length < 20) {
 			console.log('too short');
 			res.status(400).json({
 				summarized: 'Too short to summarize',
@@ -59,19 +59,10 @@ export default async function handler(
 		}
 
 		let detectedLang = await detectLanguage(req.body.text);
-		// console.log(detectedLang);
-
 		let translatedText = req.body.text;
-		let languageIcon = '';
-		//if it not en or km throw error
-		//language not supportglg
-		if (detectedLang.language != 'en') {
-			translatedText = await quickStart(req.body.text, 'en');
-			console.log('converted Lang');
-			if (detectedLang.language == 'km') {
-				languageIcon = 'Khmer';
-			}
-		}
+		let languageIcon = detectedLang.language;
+		translatedText = await quickStart(req.body.text, 'en');
+
 		//check fuel if it enough if not return erro
 		FuelTransaction(req.body.userUID, req.body.fuelCost);
 		// console.log(req.body.text);

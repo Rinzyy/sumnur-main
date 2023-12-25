@@ -129,7 +129,7 @@ const Navbar = () => {
 					href={router.pathname}
 					className="flex flex-row gap-4 items-center">
 					<div className="flex flex-row justify-center items-center gap-2">
-						<span className="text-xl font-bold">Sorsay</span>
+						<span className="text-xl font-bold">Sumnur</span>
 						<div className="mt-1 text-xs font-extrabold border-2 border-black p-1 rounded-md">
 							BETA
 						</div>

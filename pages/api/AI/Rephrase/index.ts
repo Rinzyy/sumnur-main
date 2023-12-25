@@ -4,7 +4,7 @@ import { FuelTransaction } from '../../../../lib/FuelTransactionfb';
 import { detectLanguage, quickStart } from '../../../../lib/Translation';
 
 const configuration = new Configuration({
-	organization: 'org-i5ZJjyWAyhGgofxS14HjKmEZ',
+	organization: process.env.OPENAI_ORG_ID,
 	apiKey: process.env.OPENAI_API_KEY,
 });
 export const openai = new OpenAIApi(configuration);
@@ -92,20 +92,12 @@ export default async function handler(
 		intent = switchIntent(req.body.options.intent);
 		instruct = switchInstruct(req.body.options.isRephrase);
 
+		//using google API
 		let detectedLang = await detectLanguage(req.body.text);
 		console.log(detectedLang);
-
 		let translatedText = req.body.text;
-		let languageIcon = '';
-		//if it not en or km throw error
-		//language not supportglg
-		if (detectedLang.language != 'en') {
-			translatedText = await quickStart(req.body.text, 'en');
-			console.log('converted Lang');
-			if (detectedLang.language == 'km') {
-				languageIcon = 'Khmer';
-			}
-		}
+		let languageIcon = detectedLang.language;
+		translatedText = await quickStart(req.body.text, 'en');
 
 		let finalPrompt = `${instruct} the following text to make it more clear, concise,grammatically correct and easily understandable for a general audience ${intent}${tone}: "${translatedText}"`;
 		let response = await OpenAIRequest(finalPrompt);

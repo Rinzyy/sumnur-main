@@ -33,7 +33,7 @@ const Benefit = () => {
 				</div>
 				<span className=" text-4xl text-center">Our Current Services</span>
 				<div className="container px-5 pb-14 mx-auto flex flex-wrap">
-					<div className="flex flex-col lg:flex-row -m-4">
+					<div className="flex flex-col lg:flex-row -m-4 ">
 						{data.map(item => (
 							<BenefitCard
 								key={item.title}

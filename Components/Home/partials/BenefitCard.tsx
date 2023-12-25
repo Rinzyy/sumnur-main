@@ -7,9 +7,9 @@ interface props {
 }
 const BenefitCard = ({ title, description, link }: props) => {
 	return (
-		<div className="relative w-full">
-			<div className="p-4 md:w-full">
-				<div className="flex border border-gray-600 rounded-lg border-opacity-50 p-8 sm:flex-row flex-col">
+		<div className="relative w-full h-full">
+			<div className="p-4 md:w-full h-full ">
+				<div className="flex border h-full justify-evenly items-start border-gray-600 rounded-lg border-opacity-50 p-8 sm:flex-row flex-col">
 					<div className="w-16 h-16 sm:mr-8 sm:mb-0 mb-4 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
 						<svg
 							fill="none"
@@ -22,7 +22,7 @@ const BenefitCard = ({ title, description, link }: props) => {
 							<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
 						</svg>
 					</div>
-					<div className="flex-grow">
+					<div className="flex-col h-full justify-around">
 						<h2 className="text-gray-900 text-lg title-font font-medium mb-3">
 							{title}
 						</h2>

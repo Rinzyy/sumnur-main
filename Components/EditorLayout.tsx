@@ -23,14 +23,6 @@ const EditorLayout = ({ children }: any) => {
 						name="Rephrase"
 						icon={<SpellcheckOutlinedIcon />}
 					/>
-					{/* <SidebarButton
-						path="/Grammar"
-						name="Grammar & Spelling"
-						icon={<SpellcheckOutlinedIcon />}
-					/>
-					<div className="flex items-center justify-center w-full">
-						<div className="border-t-2 mx-1  w-full"></div>
-					</div> */}
 
 					<SidebarButton
 						path="/toEmail"

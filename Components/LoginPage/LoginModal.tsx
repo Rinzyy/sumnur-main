@@ -49,7 +49,7 @@ async function createNewUser(user: any) {
 	batch.set(
 		fuelRef,
 		{
-			fuel: 50,
+			fuel: 100,
 			avgFuelUsage: 0,
 			isPremium: false,
 			totalFuelUsage: 0,
